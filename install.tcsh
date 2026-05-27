@@ -8,7 +8,7 @@
 set paramfile = "/tmp/installer.$$"
 
 # リポジトリ名
-set ver = "freebsd144"
+set ver = "freebsd145"
 
 # インストール選択画面の表示
 set selected = `dialog \
@@ -48,7 +48,7 @@ if (" ${selected:q} " =~ "* use_re0 *") then
 endif
 
 # vimエディターをインストールする (3.初期設定 vimエディタ)
-sudo pkg install -y -q vim
+sudo pkg install -y -q vim-x11
 cp ./.vimrc ~
 sed -i '' 's/^"//g' ~/.vimrc
 
