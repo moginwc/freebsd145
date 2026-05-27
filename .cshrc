@@ -15,13 +15,7 @@ alias l		'ls -l | more -e'
 alias ll	'ls -la | more -e'
 alias vi	vim
 alias rm	'rm -i'
-
-# wineサンプル
-#wine#alias bz       'wine ~/wine_bin/Bz/Bz64.exe'
-#wine#alias hidemaru 'wine ~/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe'
-#wine#alias winmerge 'wine ~/.wine/drive_c/Program\ Files/WinMerge/WinMergeU.exe'
-#wine#alias cd32     'cd ~/.wine/drive_c/Program\ Files\ \(x86\)'
-#wine#alias cd64     'cd ~/.wine/drive_c/Program\ Files'
+alias mv    'mv -i'
 
 # These are normally set through /etc/login.conf.  You may override them here
 # if wanted.
