@@ -24,7 +24,7 @@ xkbcomp -I$HOME/.xkb ~/.xkb/keymap/mykbd $DISPLAY
 xsetroot -solid \#5b468f
 xclock -update 1 -d -strftime '%Y-%m-%d(%a) %T' -geometry -1+1 -bg \#f8f8f7 &
 xterm -geometry 109x5+1+1 -title "コンソール" -e tail -f /var/log/messages &
-xfce4-terminal --geometry=80x24+1+97 --title="端末エミュレータ" &
+mlterm --geometry=80x24+1+97 --title="端末エミュレータ" &
 #xpad -s &
 
 ##autocutsel -selection PRIMARY &
