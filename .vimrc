@@ -3,6 +3,7 @@ set ambiwidth=double
 set ignorecase
 set ruler
 syntax on
+set clipboard=unnamedplus
 
 "augroup Mouse
 "  autocmd!
