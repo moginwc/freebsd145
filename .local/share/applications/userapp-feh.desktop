@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Exec=feh -. --start-at %f %f
+Name=feh(画面フィット)

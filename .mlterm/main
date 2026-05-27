@@ -1,0 +1,14 @@
+input_method = uim
+fontsize = 16
+scrollbar_mode = right
+scrollbar_view_name = athena
+use_anti_alias = true
+line_space = 2
+bel_mode = none
+bg_color = #fff7e9
+blink_cursor = true
+word_separators = " ="
+logsize = 8192
+use_combining = false
+static_backscroll_mode = true
+box_drawing_font = decsp

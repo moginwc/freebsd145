@@ -1,0 +1,63 @@
+{
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "id": "5",
+            "name": "Google",
+            "type": "url",
+            "url": "https://www.google.com/"
+         }, {
+            "id": "6",
+            "name": "YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/"
+         }, {
+            "id": "7",
+            "name": "Googleマップ",
+            "type": "url",
+            "url": "https://www.google.com/maps/"
+         }, {
+            "id": "8",
+            "name": "ChatGPT",
+            "type": "url",
+            "url": "https://chatgpt.com"
+         }, {
+            "id": "9",
+            "name": "Google翻訳",
+            "type": "url",
+            "url": "https://translate.google.com/"
+         }, {
+            "id": "10",
+            "name": "47NEWS",
+            "type": "url",
+            "url": "https://www.47news.jp/"
+         }, {
+            "id": "11",
+            "name": "日本気象協会",
+            "type": "url",
+            "url": "https://tenki.jp/"
+         }, {
+            "id": "12",
+            "name": "radiko",
+            "type": "url",
+            "url": "https://radiko.jp/"
+         } ],
+         "id": "1",
+         "name": "ブックマーク バー",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "id": "2",
+         "name": "その他のブックマーク",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "id": "3",
+         "name": "モバイルのブックマーク",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

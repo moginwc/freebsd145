@@ -1,0 +1,15 @@
+#!/bin/tcsh
+
+set work_dir = "$HOME/work"
+
+switch ($1)
+    case "C-g":
+        # Ctrl+X → Ctrl-G、で GIMP を起動する
+        tr '\n' '\0' | xargs -0 tcsh -c 'gimp $*:q &'
+        breaksw
+    case "C-c":
+        # Ctrl+X → Ctrl+C で ~/work にコピーする
+        mkdir -p "$work_dir"
+        tr '\n' '\0' | xargs -0 tcsh -c 'cp -p $*:q '"$work_dir"'/'
+        breaksw
+endsw

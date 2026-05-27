@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8"?>
+
+<channel name="xfce4-terminal" version="1.0">
+  <property name="scrolling-unlimited" type="bool" value="true"/>
+  <property name="misc-cursor-blinks" type="bool" value="true"/>
+  <property name="misc-show-unsafe-paste-dialog" type="bool" value="false"/>
+  <property name="font-name" type="string" value="IPAゴシック 12"/>
+  <property name="cell-width-scale" type="double" value="1.1000000000000001"/>
+  <property name="misc-menubar-default" type="bool" value="false"/>
+  <property name="color-foreground" type="string" value="#000000000000"/>
+  <property name="color-background" type="string" value="#fffff7f7e9e9"/>
+  <property name="color-background-vary" type="bool" value="false"/>
+  <property name="binding-ambiguous-width" type="string" value="TERMINAL_AMBIGUOUS_WIDTH_BINDING_WIDE"/>
+  <property name="color-palette" type="string" value="rgb(0,0,0);rgb(205,0,0);rgb(0,205,0);rgb(205,205,0);rgb(0,0,238);rgb(205,0,205);rgb(0,205,205);rgb(229,229,229);rgb(127,127,127);rgb(255,0,0);rgb(0,255,0);rgb(255,255,0);rgb(92,92,255);rgb(255,0,255);rgb(0,255,255);rgb(255,255,255)"/>
+  <property name="misc-hyperlinks-enabled" type="bool" value="false"/>
+</channel>

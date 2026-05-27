@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>行きたい場所リスト</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <h1>行きたい場所リスト</h1>
+
+    <!-- 登録用フォーム -->
+    <form method="post" action="/add">
+      <input type="text" name="name" placeholder="場所" required>
+      <input type="text" name="lat" placeholder="緯度" required>
+      <input type="text" name="lon" placeholder="経度" required>
+      <select name="status">
+        <option value="未訪問">未訪問</option>
+        <option value="訪問済み">訪問済み</option>
+        <option value="保留">保留</option>
+      </select>
+      <button type="submit">追加</button>
+    </form>
+
+    <!-- 検索用フォーム -->
+    <form method="get" action="/">
+      <input type="text" name="keyword" placeholder="検索文字列...">
+      <button type="submit">絞り込み検索</button>
+    </form>
+
+    <!-- 一覧表示 -->
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>場所</th>
+          <th>緯度</th>
+          <th>経度</th>
+          <th>状況</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set categories = ['未訪問', '訪問済み', '保留'] %}
+        {% for r in records %}
+        <tr>
+          <td><a href="https://www.google.com/maps/place/{{ r[2] }},{{ r[3] }}" target="_blank">地図</a></td>
+          <form method="post" action="/edit/{{ r[0] }}">
+            <td><input type="text" name="name" value="{{ r[1] }}" required></td>
+            <td><input type="text" name="lat" value="{{ r[2] }}" required></td>
+            <td><input type="text" name="lon" value="{{ r[3] }}" required></td>
+            <td>
+              <select name="status">
+                {% for cat in categories %}
+                <option value="{{ cat }}" {% if cat == r[4] %}selected{% endif %}>{{ cat }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <button type="submit">更新</button>
+              <a href="/delete/{{ r[0] }}" onclick="return confirm('削除しますか？')">削除</a>
+            </td>
+          </form>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- 全件ダウンロード -->
+    <p><a href="/csv">CSVダウンロード</a></p>
+    <footer class="footer">
+      <p>(C) 2025 . All right reserved.</p>
+    </footer>
+
+  </body>
+</html>

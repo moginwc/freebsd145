@@ -1,0 +1,46 @@
+#!/bin/tcsh
+
+set out_dir = "$HOME"
+
+switch ($1)
+
+    case "C-g": # gimpを起動する
+        tr '\n' '\0' | xargs -0 tcsh -c 'gimp $*:q &'
+        breaksw
+
+    case "C-2": # 画像を200pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -resize 200x200 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-3": # 画像を320pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -resize 320x320 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-4": # 画像を480pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -resize 480x480 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-6": # 画像を640pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -resize 640x640 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-l": # 画像を左に90度回転後、480pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -rotate -90 -resize 480x480 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-r": # 画像を右に90度回転後、480pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -rotate 90 -resize 480x480 -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+    case "C-s": # 画像の短辺側を640pxにリサイズする
+        xargs -I {} env out_dir=$out_dir tcsh -c 'set filename={}; \
+            convert $filename -auto-orient -resize 640x640^ -unsharp 0x1 -strip "$out_dir/${filename:t}"'
+        breaksw
+
+endsw

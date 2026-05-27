@@ -1,0 +1,6 @@
+# 除外ディレクトリ・ファイル
+/home/pcuser/.cache
+/home/pcuser/.i386-wine-pkg
+/home/pcuser/.wine
+*.core
+._*

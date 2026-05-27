@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>ここで Terminal を開く</name>
+	<submenu></submenu>
+	<unique-id>1</unique-id>
+	<command>xfce4-terminal --working-directory %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>ここで nsxiv を開く</name>
+	<submenu></submenu>
+	<unique-id>2</unique-id>
+	<command>nsxiv -t -r %f</command>
+	<description></description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>200pxリサイズ＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>11</unique-id>
+	<command>img_conv.tcsh 200px %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>320pxリサイズ＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>12</unique-id>
+	<command>img_conv.tcsh 320px %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>480pxリサイズ＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>13</unique-id>
+	<command>img_conv.tcsh 480px %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>480pxリサイズ＋左回転＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>14</unique-id>
+	<command>img_conv.tcsh 480px_rotate_left %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>480pxリサイズ＋右回転＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>15</unique-id>
+	<command>img_conv.tcsh 480px_rotate_right %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>640pxリサイズ＋アンシャープ</name>
+	<submenu></submenu>
+	<unique-id>16</unique-id>
+	<command>img_conv.tcsh 640px %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<image-files/>
+</action>
+</actions>

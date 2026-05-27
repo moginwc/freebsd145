@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Binary Editor BZ で開く
+Exec=wine /home/pcuser/wine_bin/Bz/Bz64.exe %f

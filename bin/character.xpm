@@ -1,0 +1,19 @@
+/* XPM */
+static char *XPM_X[] = {
+/* width height num_colors chars_per_pixel */
+"8 8 5 2",
+". c None",        /* 透明背景 */
+"s c #00ccff",     /* スライム色（水色） */
+"w c #ffffff",     /* 白目 */
+"b c #000000",     /* 黒目・輪郭 */
+"r c #ff6666",     /* 赤い口 */
+/* pixels */
+". . s s s s . . ",
+". s s s s s s . ",
+"s s w b b w s s ",
+"s s s s s s s s ",
+"s s s s s s s s ",
+"s s r r r s s s ",
+". s s s s s s . ",
+". . s s s s . . "
+};

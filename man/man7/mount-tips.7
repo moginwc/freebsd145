@@ -1,0 +1,24 @@
+.TH MOUNT-TIPS 7 "2025年11月" "個人メモ" "ユーザーガイド"
+.SH 【名前】
+mount-tips \- よく使うmountコマンドの例集
+.SH 【使用例】
+.TP
+内蔵ディスクをマウントする：
+.EX
+% sudo mount /dev/ada0s1 /mnt
+.EE
+.TP
+USB接続された外付けディスクをマウントする：
+.EX
+% sudo mount /dev/da0s1 /mnt
+.EE
+.TP
+\&.isoファイルマウントする：
+.EX
+% sudo mount -t cd9660 /dev/`sudo mdconfig -f filename.iso` /mnt
+.EE
+.TP
+WindowsのUSBメモリーをマウントする：
+.EX
+% sudo mount_msdosfs -L ja_JP.UTF-8 /dev/da0s1 /mnt
+.EE

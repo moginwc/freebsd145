@@ -1,0 +1,60 @@
+# chroot用のディレクトリ、システムファイルを構築する
+su
+mkdir -p /srv/chroot
+cd /srv/chroot
+fetch https://download.freebsd.org/ftp/releases/amd64/14.4-RELEASE/base.txz
+tar -xvpf base.txz
+
+# ネットワーク、タイムゾーン、Xサーバー・クライアント環境を設定する
+cp /etc/resolv.conf /srv/chroot/etc
+cp /etc/localtime /srv/chroot/etc
+mkdir -p /srv/chroot/tmp/.X11-unix
+
+# chroot環境に移る
+chroot /srv/chroot /bin/sh
+
+# ネットワーク、タイムゾーン、OSアップデート、pkg環境を構築する [chroot内で実施]
+freebsd-update fetch
+freebsd-update install
+pkg
+
+# アプリ、フォントなどをインストールする [chroot内で実施]
+pkg install -y firefox mesa-libs ja-font-ipa xset
+
+# ユーザーを設定する [chroot内で実施]
+adduser
+
+# ユーザーの環境変数を設定する [chroot内で実施]
+vi /home/pcuser/.cshrc
+
+setenv LANG ja_JP.UTF-8
+setenv LC_ALL ja_JP.UTF-8
+setenv GTK_IM_MODULE uim
+setenv QT_IM_MODULE uim
+setenv XMODIFIERS "@im=uim"
+setenv DISPLAY :0
+
+# ユーザーの環境変数を設定する（続き） [chroot内で実施]
+vi /home/pcuser/.login
+
+xset r rate 250 40
+
+# chroot環境から抜ける [chroot内で実施]
+exit
+
+# suから抜ける
+exit
+
+# chroot環境のFirefoxを起動する
+xhost +local:
+sudo mount -t nullfs /tmp/.X11-unix /srv/chroot/tmp/.X11-unix
+sudo mount -t devfs devfs /srv/chroot/dev
+sudo chroot /srv/chroot su - pcuser -c 'firefox'
+
+# 使用後、アンマウントする
+sudo umount /srv/chroot/tmp/.X11-unix
+sudo umount /srv/chroot/dev
+
+# chroot環境を完全消去する
+sudo chflags -R noschg /srv/chroot
+sudo rm -rf /srv/chroot

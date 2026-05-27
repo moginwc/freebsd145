@@ -1,0 +1,86 @@
+.TH DISKUTILITY-TIPS 7 "2026年4月" "個人メモ" "ユーザーガイド"
+.SH 【名前】
+diskutility-tips \- よく使うディスク操作関連ツールの例集
+.SH 【警告】
+.B デバイス名を間違えないように注意してください。
+.SH 【使用例】
+.TP
+接続されているメディアを表示する：
+.EX
+% sudo camcontrol devlist
+.EE
+.TP
+パーティション構成を表示する：
+.EX
+% gpart show
+% gpart show ada0
+% gpart show nda0
+% gpart show da0
+.EE
+.TP
+ディスク詳細情報を表示する：
+.EX
+% sudo camcontrol identify ada0
+% sudo camcontrol identify nda0
+% sudo camcontrol inquiry da0
+% sudo smartctl -a /dev/ada0 # smartmontoolsが必要
+.EE
+.TP
+イメージファイルをUSBメモリへ書き込む：
+.EX
+% sudo dd if=imagefile.img of=/dev/da0 bs=1M conv=sync status=progres
+.EE
+.TP
+USBメモリをFAT32でフォーマットする手順：
+.RS 4
+.IP "1." 4
+デバイス名を確認
+.EX
+% sudo camcontrol devlist
+.EE
+.IP "2." 4
+既存パーティションを削除
+.EX
+% sudo gpart destroy -F /dev/da0
+.EE
+.IP "3." 4
+MBRを作成
+.EX
+% sudo gpart create -s MBR /dev/da0
+.EE
+.IP "4." 4
+FAT32パーティションを追加
+.EX
+% sudo gpart add -t fat32 -a 1M /dev/da0
+.EE
+.IP "5." 4
+フォーマット
+.EX
+% sudo newfs_msdos -F 32 -L "UNTITLED" /dev/da0s1
+.EE
+.IP "6." 4
+確認
+.EX
+% sudo fstyp /dev/da0s1
+.EE
+.RE
+.PP
+.TP
+USB接続HDDを完全に消去する手順：
+.RS 4
+.IP "1." 4
+デバイス名を確認
+.EX
+% sudo camcontrol devlist
+.EE
+.IP "2." 4
+ディスク名、シリアル番号を確認
+.nf
+% sudo smartctl -a /dev/da0 | grep -i -e 'device model' -i -e 'serial number'
+.fi
+.IP "3." 4
+完全消去
+.EX
+% sudo dd if=/dev/zero of=/dev/da0 bs=1M
+.EE
+.RE

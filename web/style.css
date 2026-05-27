@@ -1,0 +1,93 @@
+body {
+  font-family: IPAPGothic ;
+  margin: 0;
+  padding: 0;
+  background-color: #fcffcd;
+  text-align: center;
+}
+
+h1 {
+  background-color: #6a9b66;
+  color: white;
+  padding: 16px 0;
+  margin: 0;
+}
+
+form {
+  margin-top: 16px;
+  padding: 8px;
+  background-color: #fcffcd;
+  border-radius: 4px;
+}
+
+input[type="text"] {
+  font-family: IPAGothic ;
+  padding: 8px;
+  margin: 8px;
+  width: 160px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+select {
+  font-family: IPAGothic ;
+  padding: 8px;
+  margin: 8px;
+  width: 160px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: #dddddd;
+  color: black;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f2f2f2;
+}
+
+table {
+  width: 96%;
+  margin: 8px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th {
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+td {
+  padding: 2px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+a {
+  color: #d9534f;
+  text-decoration: none;
+  margin-left: 0px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #979b67 ;
+  color: #00000 ;
+  text-align: right ;
+  padding: 1rem ;
+  border-top: 1px solid #cccccc ;
+}

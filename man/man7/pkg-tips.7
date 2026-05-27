@@ -1,0 +1,39 @@
+.TH PKG-TIPS 7 "2025年11月" "個人メモ" "ユーザーガイド"
+.SH 【名前】
+pkg-tips \- よく使うpkgコマンドの例集
+.SH 【使用例】
+.TP
+インストールしたパッケージを全て表示する:
+.EX
+% pkg info
+.EE
+.TP
+手動でインストールしたパッケージのみを表示する:
+.EX
+% pkg query -e '%a = 0' '%o'
+.EE
+.TP
+pkg install後に表示されるメッセージを再表示する:
+.EX
+% pkg info -D \fIパッケージ名\fR
+.EE
+.TP
+パッケージの依存関係を表示する:
+.EX
+% pkg info -d -r \fIパッケージ名\fR
+.EE
+.TP
+パッケージを削除する:
+.EX
+% sudo pkg delete \fIパッケージ名\fR
+.EE
+.TP
+どのパッケージからも参照されていないパッケージを削除する:
+.EX
+% sudo pkg autoremove
+.EE
+.TP
+コマンド名から、どのパッケージに含まれるかを調べる:
+.EX
+% pkg which `which \fIコマンド名\fR`
+.EE

@@ -1,0 +1,20 @@
+#!/bin/tcsh
+
+# 変数を設定する
+set temp_file = "/tmp/key-handler.tmp"
+set term_app = "mlterm"
+set menu_app = "$HOME/bin/image_edit.tcsh"
+set out_dir = "$HOME"
+
+switch ($1)
+
+    case "C-g":
+        tr '\n' '\0' | xargs -0 tcsh -c 'gimp $*:q &'
+        breaksw
+
+    case "C-m":
+        cat > ${temp_file}
+        ${term_app} -e ${menu_app} &
+        breaksw
+
+endsw

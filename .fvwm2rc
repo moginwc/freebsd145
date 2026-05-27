@@ -1,0 +1,414 @@
+#----------------------------------------------------------------------
+# 1: ファンクション
+#----------------------------------------------------------------------
+
+# タイトルバーをクリック・ドラッグ・ダブルクリックした時の動作
+DestroyFunc Func-TitleMouse
+AddToFunc   Func-TitleMouse I Raise
++                           M Move
++                           D Maximize
+
+# CTRLキーを押しながら
+# タイトルバーをクリック・ドラッグ・ダブルクリックした時の動作
+##DestroyFunc Func-TitleMouseCtrl
+##AddToFunc   Func-TitleMouseCtrl I Raise
+##+                               M Move
+##+                               D Maximize 0 100
+
+# アイコン化から最大表示
+DestroyFunc Func-Maximize
+AddToFunc   Func-Maximize
++ I Iconify off
++ I Maximize
+
+# ウィンドウリスト表示時に、マウスカーソルが移動するのを防止する
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I Iconify off
++ I Focus
++ I Raise
+
+# ランチャー(firefox) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_firefox
+AddToFunc Func-LaunchOrRaise_firefox
++ I All  (firefox-esr) Raise
++ I Next (firefox-esr) Focus
++ I None (firefox-esr) Exec firefox
+
+# ランチャー(chromium) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_chromium
+AddToFunc Func-LaunchOrRaise_chromium
++ I All  (Chromium-browser) Raise
++ I Next (Chromium-browser) Focus
++ I None (Chromium-browser) Exec chrome --no-default-browser-check
+
+# ランチャー(mlterm) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_mlterm
+AddToFunc Func-LaunchOrRaise_mlterm
++ I All (mlterm) Raise
++ I Next (mlterm) Focus
++ I None (mlterm) Exec mlterm --geometry=80x24 --title="端末エミュレータ"
+
+# ランチャー(xfce4-terminal) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_xfce4terminal
+AddToFunc Func-LaunchOrRaise_xfce4terminal
++ I All (xfce4-terminal) Raise
++ I Next (xfce4-terminal) Focus
++ I None (xfce4-terminal) Exec xfce4-terminal --geometry=80x24 --title="端末エミュレータ"
+
+# ランチャー(conky) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_conky
+AddToFunc Func-LaunchOrRaise_conky
++ I All  (conky) Raise
++ I Next (conky) Focus
++ I None (conky) Exec conky
+
+# ランチャー(hidemaru.exe) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_hidemaru
+AddToFunc Func-LaunchOrRaise_hidemaru
++ I All  (hidemaru.exe) Raise
++ I Next (hidemaru.exe) Focus
++ I None (hidemaru.exe) Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
+
+#----------------------------------------------------------------------
+# 2: スタイル
+#----------------------------------------------------------------------
+
+# アイコンファイルの保存先
+ImagePath $HOME/icons
+
+# 仮想デスクトップを使用しない
+DeskTopSize 1x1
+
+# ウインドウをマウスでクリックしたらフォーカスする
+Style * ClickToFocus, MouseFocusClickRaises
+
+# ウインドウタイトルなどのフォント
+DefaultFont "xft:IPAPgothic:size=10.5"
+
+# RDP接続の際にウインドウが選択できなくなるのを防止する
+IgnoreModifiers L25
+
+# ウインドウ枠の幅
+Style * borderWidth 5, HandleWidth 5
+
+# ウインドウの見た目をMWM風にする
+Style * MWMBorder, MWMButtons, MWMdecor
+
+# デスクトップ左下に最小化したアイコンを配置する
+Style * IconBox 1 -1 -1 -1
+
+# ウインドウの配色(非アクティブ時,アクティブ時)
+Style * Colorset 1, HilightColorset 2
+
+# 各アプリケーションごとの設定
+Style "xclock" NoTitle, borderWidth 0, HandleWidth 0, WindowListSkip
+Style "mlterm" Icon xterm-sol.png
+Style *        Icon programs.png
+
+# ドラッグ中にウィンドウの内容を表示する
+OpaqueMoveSize unlimited
+Style * ResizeOpaque
+
+# ウインドウが画面からはみ出さないように調整する(効果不明)
+Style * MaxWindowSize 100 100
+
+# wineにおいて、ダイアログボックス表示後に元の画面にフォーカスが戻らないのを防止する
+Style * Lenience
+
+# ダイアログやポップアップウィンドウに対し、装飾・重なり順・フォーカス動作を制御する
+# - DecorateTransient: ダイアログにタイトルバーなどの装飾を表示
+# - StackTransientParent: ダイアログが親ウィンドウの上に表示されるようにする
+# - FPReleaseFocusTransient: ダイアログが閉じたらフォーカスを親に戻す
+Style * DecorateTransient
+#wine#Style "*.exe" !DecorateTransient
+Style * StackTransientParent
+Style * FPReleaseFocusTransient
+
+#----------------------------------------------------------------------
+# 3: カラーセット
+#----------------------------------------------------------------------
+
+# ウインドウのカラーセットを定義する
+Colorset 1  fg #444444, bg #aeb2c3
+Colorset 2  fg #ffffff, bg #b24d7a
+
+# ルートメニューのカラーセットを定義する
+Colorset 5  fg #000000, bg #cecece
+Colorset 6  fg #000000, bg #b5b5b5
+Colorset 7  fg #888888, bg #cecece
+Colorset 8  fg #000000, bg #cecece
+
+# fvwmbuttonsのカラーセットを定義する
+Colorset 12 fg #000000, bg #bebebe
+
+#----------------------------------------------------------------------
+# 4: メニュー
+#----------------------------------------------------------------------
+
+# ルートメニューをMWM風にする
+MenuStyle * Mwm
+
+# ルートメニュー枠の幅
+MenuStyle * BorderWidth 1
+
+# 選択されたメニューの見た目を押された感じにする
+MenuStyle * Hilight3DThickness -1
+
+# ルートメニューのフォント
+MenuStyle * Font "xft:IPAPgothic:size=10.5"
+
+# ルートメニューの配色
+MenuStyle * MenuColorset 5, ActiveColorset 6, GreyedColorset 7, TitleColorset 8
+MenuStyle * HilightBack, HilightTitleBack
+
+# ルートメニューの設定
+AddToMenu RootMenu    "ワークスペース"                  Title
++                     "プログラム"                      Popup Programs
++                     "ユーティリティ"                  Popup Utilities
++                     ""                                Nop
++                     "終了..."                         Module FvwmForm QuitVerify
+
+AddToMenu Programs    "プログラム"                      Title
+#+                     "端末エミュレータ 80x24..."       Exec mlterm --title=端末エミュレータ
+#+                     "端末エミュレータ 132x24..."      Exec mlterm --geometry=132x24 --title=端末エミュレータ
++                     "端末エミュレータ 80x24..."       Exec xfce4-terminal --title=端末エミュレータ
++                     "端末エミュレータ 132x24..."      Exec xfce4-terminal --geometry=132x24 --title=端末エミュレータ
++                     ""                                Nop
+##+                     "ファイルマネージャ..."           Exec dbus-launch thunar
+#wine#+                     "テキストエディタ..."             Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
+#+                     "メールツール..."                 Exec sylpheed
+##+                     "メールツール..."                 Exec chrome --no-default-browser-check https://mail.google.com/mail/
++                     "カレンダ..."                     Exec xterm -geometry 70x38 -T カレンダ -e tcsh -c "cal -y; stty -icanon; dd bs=1 count=1"
++                     ""                                Nop
++                     "時計..."                         Exec xclock -name "時計"
++                     "電卓..."                         Exec xcalc
++                     "パフォーマンスメータ..."         Exec xterm -e top
++                     ""                                Nop
+##+                     "イメージツール..."               Exec gimp
+##+                     "写真..."                         Exec nsxiv -t -r $HOME/Pictures
++                     "スクリーンショット..."           Popup Screenshot
+##+                     ""                                Nop
+##+                     "地理情報システム QGIS..."        Exec qgis
+#+                     "3Dモデリング OpenSCAD..."        Exec openscad
++                     ""                                Nop
++                     "付箋..."                         Exec xpad -s
+##+                     ""                                Nop
+##+                     "リモートデスクトップ接続..."     Exec xfreerdp /u:username /p:password /size:800x600 /sound /clipboard /cert-ignore /v:192.168.1.16
+##+                     "VNCビューア..."                  Exec vncviewer
+##+                      "Telnet (シフトJIS接続)..."       Exec mlterm --km=Shift_JIS --title=Telnet\ \(シフトJIS接続\) -e telnet -8
++                     ""                                Nop
++                     "ウェブブラウザ..."               Exec firefox
+##+                     "ウェブブラウザ Firefox..."       Exec firefox
+##+                     "ウェブブラウザ Chromium..."      Exec chrome --no-default-browser-check
+
+AddToMenu Utilities   "ユーティリティ"                  Title
++                     "再表示"                          Refresh
++                     "ウィンドウマネージャの再起動..." Restart
++                     "ロックスクリーン"                Exec xlock -mode blank -mousemotion -timeout 10
++                     "拡大鏡..."                       Exec lupe -geometry 24x24 -noshape -mag 8
+##+                     "拡大鏡 pixel_loupe..."            Exec python3.11 $HOME/bin/pixel_loupe.py
+##+                     "文字コード表..."                 Exec firefox $HOME/html/cp932map.html
++                     "入力メソッドの設定..."           Exec uim-pref-gtk3
++                     "日本語入力システム設定..."       Exec uim-pref-gtk3
+#+                     "日本語入力システム設定..."       Exec env QT_IM_MODULE= mozc_tool config_dialog
+
+AddToMenu Window-Ops  "移動"                            Move
++                     "サイズ変更"                      Resize
++                     "アイコン化"                      Iconify
++                     "最大表示"                        Maximize
++                     "奥へ"                            Lower
++                     ""                                Nop
++                     "閉じる"                          Delete
+
+AddToMenu Window-Ops2 "復元"                            Iconify
++                     "移動"                            Move
++                     "最大表示"                        Func-Maximize
++                     "奥へ"                            Lower
++                     ""                                Nop
++                     "閉じる"                          Delete
+
+AddToMenu Screenshot  "スクリーンショット"                          Title
++                     "画面全体..."                                 Exec scrot -f         $HOME/screenshot%Y%m%d%H%M%S.png
++                     "アクティブウインドウ..."                     Exec scrot -b -u -f   $HOME/screenshot%Y%m%d%H%M%S.png
++                     "アクティブウインドウの内側..."               Exec scrot -u -f      $HOME/screenshot%Y%m%d%H%M%S.png
++                     "選択部分..."                                 Exec scrot -s -f      $HOME/screenshot%Y%m%d%H%M%S.png
++                     ""                                            Nop
++                     "5秒後に画面全体..."                          Exec scrot -d 5 -f    $HOME/screenshot%Y%m%d%H%M%S.png
++                     "5秒後に画面全体(マウスポインタ含む)..."      Exec scrot -p -d 5 -f $HOME/screenshot%Y%m%d%H%M%S.png
+
+# ランチャー(firefox)右クリックメニュー
+AddToMenu firefox_menu
++                     "Firefox"                         Title
++                     "新規ウインドウ"                  Exec firefox --new-window
++                     "新規プライベートウインドウ"      Exec firefox --private-window
++                     ""                                Nop
++                     "終了"                            All (firefox-esr) Close
+
+# ランチャー(chromium)右クリックメニュー
+AddToMenu chromium_menu
++                     "Chromium"                        Title
++                     "新規ウインドウ"                  Exec chrome --no-default-browser-check
++                     "新規プライベートウインドウ"      Exec chrome --no-default-browser-check --incognito
++                     ""                                Nop
++                     "終了"                            All (Chromium-browser) Close
+
+# ランチャー(mlterm)右クリックメニュー
+AddToMenu mlterm_menu
++                     "mlterm"                              Title
++                     "新規ウインドウ 80x24"                Exec mlterm --geometry=80x24 --title=端末エミュレータ
++                     "新規ウインドウ 132x24"               Exec mlterm --geometry=132x24 --title=端末エミュレータ
++                     "新規ウインドウ 80x24 (曖昧幅:半角)"  Exec mlterm --geometry=80x24 --title="端末エミュレータ - 曖昧幅:半角" --ac=1
+#+                     "上下分割レイアウト tmux"             Exec mlterm --geometry=132x50 --title=端末エミュレータ -e tmux new-session \; split-window -v \; select-pane -t 0
+#+                     "1-2分割レイアウト tmux"              Exec mlterm --geometry=161x34 --title=端末エミュレータ -e tmux new-session \; split-window -h \; select-pane -t 1 \; split-window -v \; attach \; select-pane -t 0
+# ランチャー(xfce4-terminal)右クリックメニュー
+AddToMenu xfce4terminal_menu
++                     "xfce4-terminal"               Title
++                     "新規ウインドウ 80x24"            Exec xfce4-terminal --geometry=80x24 --title=端末エミュレータ
++                     "新規ウインドウ 132x24"           Exec xfce4-terminal --geometry=132x24 --title=端末エミュレータ
+
+# ランチャー(hidemaru)右クリックメニュー
+AddToMenu hidemaru_menu
++                     "秀丸エディタ"                    Title
++                     "新規ドキュメント"                Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
++                     ""                                Nop
++                     "終了"                            All (hidemaru.exe) Close
+
+#----------------------------------------------------------------------
+# 5: マウスとキー設定
+#----------------------------------------------------------------------
+
+# タイトルバーの各ボタンをマウスで左クリックした時の動作
+Mouse 1 1 A Menu Window-Ops Close
+Mouse 1 2 A Close
+Mouse 1 4 A Maximize
+##Mouse 1 4 C Maximize 0 100
+Mouse 1 6 A Iconify
+
+# デスクトップでマウスをクリックした時の動作
+Mouse 1 R A Nop
+Mouse 2 R A WindowList
+Mouse 3 R A Menu RootMenu Nop
+
+# タイトルバーを右クリックした時の動作
+Mouse 3 T A Menu Window-Ops Nop
+
+# タイトルバーでマウス操作した時の動作
+Mouse 1 T A Func-TitleMouse
+##Mouse 1 T C Func-TitleMouseCtrl
+
+# 最小化されたアイコンを左クリックした場合の動作
+Mouse 1 I A Iconify
+
+# 最小化されたアイコンを右クリックした場合の動作
+Mouse 3 I A Menu Window-Ops2 Nop
+
+# ボリュームUP/DOWN/MUTEボタンの動作
+#Key XF86AudioRaiseVolume A A Exec mixer vol.volume=+0.05
+#Key XF86AudioLowerVolume A A Exec mixer vol.volume=-0.05
+#Key XF86AudioMute        A A Exec mixer vol.mute=^
+
+# 音量操作(CTRL+ALT+↑で音量大、CTRL+ALT+↓で音量小、CTRL+ALT+Mでミュート/解除)
+#Key Up                   A CM Exec mixer vol.volume=+0.05
+#Key Down                 A CM Exec mixer vol.volume=-0.05
+#Key M                    A CM Exec mixer vol.mute=^
+
+# ボリュームUP/DOWN/MUTEボタンの動作(OSD版)
+#volume_keys_true#Key XF86AudioRaiseVolume A A Exec tcsh -c "mixer vol.volume=+0.05; volume_osd_client.tcsh"
+#volume_keys_true#Key XF86AudioLowerVolume A A Exec tcsh -c "mixer vol.volume=-0.05; volume_osd_client.tcsh"
+#volume_keys_true#Key XF86AudioMute        A A Exec tcsh -c "mixer vol.mute=^;       volume_osd_client.tcsh mute"
+
+# 音量操作(OSD版)(CTRL+ALT+↑で音量大、CTRL+ALT+↓で音量小、CTRL+ALT+Mでミュート/解除)
+#volume_keys_false#Key Up                   A CM Exec tcsh -c "mixer vol.volume=+0.05; volume_osd_client.tcsh"
+#volume_keys_false#Key Down                 A CM Exec tcsh -c "mixer vol.volume=-0.05; volume_osd_client.tcsh"
+#volume_keys_false#Key M                    A CM Exec tcsh -c "mixer vol.mute=^;       volume_osd_client.tcsh mute"
+
+# ALT+F4でアクティブウインドウを閉じる
+key F4 A M Close
+
+# スクリーンショット(PrtSc全画面, ALT+PrtSCウインドウ, CTRL+PrtSCウインドウ内部)
+##Key Print A A Exec scrot -f 'screenshot%Y%m%d%H%M%S.png'
+##Key Print A M Exec scrot -b -u -f 'screenshot%Y%m%d%H%M%S.png'
+##Key Print A C Exec scrot -u -f 'screenshot%Y%m%d%H%M%S.png'
+
+# CTRL+ALT+WIN+Pで電源OFF、CTRL+ALT+WIN+Rで再起動
+##Key P A CM4 Exec sudo shutdown -p now
+##Key R A CM4 Exec sudo shutdown -r now
+
+# CTRL+ALT+DELで画面をロックする
+##Key Delete A CM Exec xlock -mode blank -mousemotion -timeout 10
+
+# ALT+左クリックでウインドウを移動する(タイトルバーがないウインドウ対策)
+##Mouse 1 W M Move
+
+#----------------------------------------------------------------------
+# 6: ウインドウの装飾
+#----------------------------------------------------------------------
+
+# 一番左側のボタン
+ButtonStyle 1 AllActive    Vector 5 45x45@3 55x45@3 55x55@3 45x55@3 45x45@3
+ButtonStyle 1 AllInActive  Vector 5 45x45@3 55x45@3 55x55@3 45x55@3 45x45@3
+
+# 閉じるボタン
+ButtonStyle 2 AllActive    Vector 5 35x35@3 65x65@3 65x35@4 35x65@3 65x35@3
+ButtonStyle 2 AllInActive  Vector 5 35x35@3 65x65@3 65x35@4 35x65@3 65x35@3
+
+# 最大化ボタン
+ButtonStyle 4 AllActive    Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 50x30@4 50x50@3 70x50@3
+ButtonStyle 4 AllInActive  Vector 8 30x70@3 30x30@3 70x30@3 70x70@3 30x70@3 50x30@4 50x50@3 70x50@3
+
+# 最小化ボタン
+ButtonStyle 6 AllActive    Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
+ButtonStyle 6 AllInActive  Vector 5 35x60@3 65x60@3 65x50@3 35x50@3 35x60@3
+
+#----------------------------------------------------------------------
+# 7: モジュール
+#----------------------------------------------------------------------
+
+# ウインドウシステムの終了
+*QuitVerifyGrabServer
+*QuitVerifyFont         xft:IPAPgothic:size=10.5
+*QuitVerifyButtonFont   xft:IPAPgothic:size=10.5
+*QuitVerifyFore         Black
+*QuitVerifyBack         #cecece
+*QuitVerifyItemFore     Black
+*QuitVerifyItemBack     #cecece
+*QuitVerifyLine         center
+*QuitVerifyText         "ウィンドウシステムを終了しますか?"
+*QuitVerifyLine         center
+*QuitVerifyText         ""
+*QuitVerifyLine         expand
+*QuitVerifyButton       quit " 終了 "
+*QuitVerifyCommand      Quit
+*QuitVerifyButton       quit "取消し"
+*QuitVerifyCommand      Nop
+Style "QuitVerify" NoTitle, NoHandles, BorderWidth 5
+
+# FvwmBottonsの設定
+
+# デスクトップの余白[左右上下]を設定する(FvwmButtonsにあまり重ならないように)
+#EwmhBaseStruts 0 0 0 48 # 重ならない
+##EwmhBaseStruts 0 0 0 37 # 少し重なる
+
+##AddToFunc InitFunction    "I" Module FvwmButtons
+##AddToFunc RestartFunction "I" Module FvwmButtons
+
+##Style "FvwmButtons" NoTitle, BorderWidth 0, HandleWidth 0, WindowListSkip, NeverFocus, FixedPosition
+
+##*FvwmButtons: Back           #cecece
+##*FvwmButtons: ButtonGeometry 48x48+563-0
+##*FvwmButtons: Rows           1
+##*FvwmButtons: Frame          1
+##*FvwmButtons: ActiveColorset 12
+
+##*FvwmButtons: (Icon "firefox.png",   Action (Mouse 1) Func-LaunchOrRaise_firefox,  Action (Mouse 3) Menu firefox_menu)
+##*FvwmButtons: (Icon "chrome.png",    Action (Mouse 1) Func-LaunchOrRaise_chromium, Action (Mouse 3) Menu chromium_menu)
+##*FvwmButtons: (Icon "xfce4-terminal.png", Action (Mouse 1) Func-LaunchOrRaise_xfce4terminal, Action (Mouse 3) Menu xfce4terminal_menu)
+
+#mlterm#*FvwmButtons: (Icon "xterm-sol.png", Action (Mouse 1) Func-LaunchOrRaise_mlterm,   Action (Mouse 3) Menu mlterm_menu)
+
+# wineサンプル
+#wine#*FvwmButtons: (Icon "hidemaru.png",  Action (Mouse 1) Func-LaunchOrRaise_hidemaru, Action (Mouse 3) Menu hidemaru_menu)
+
+##*FvwmButtons: (Swallow "xload" 'Exec xload -update 3 -nolabel -bg \\#cecece', Action(Mouse 1) Func-LaunchOrRaise_conky)
+##*FvwmButtons: (Swallow "xbatt" 'Exec xbatt -bg \\#cecece', Padding 0 2)

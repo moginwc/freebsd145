@@ -1,0 +1,57 @@
+{
+    "policies": {
+        "DownloadDirectory": "${home}/Downloads",
+        "DontCheckDefaultBrowser": true,
+        "Homepage": {
+            "URL": "https://www.google.com/",
+            "StartPage": "homepage",
+            "Locked": false
+        },
+        "OverrideFirstRunPage": "",
+        "OverridePostUpdatePage": "",
+        "DisplayBookmarksToolbar": true,
+        "NoDefaultBookmarks": true,
+        "Bookmarks": [
+            {
+                "Title": "Google",
+                "URL": "https://www.google.com/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "YouTube",
+                "URL": "https://www.youtube.com/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "Googleマップ",
+                "URL": "https://www.google.com/maps/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "ChatGPT",
+                "URL": "https://chatgpt.com/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "Google翻訳",
+                "URL": "https://translate.google.com/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "47NEWS",
+                "URL": "https://www.47news.jp/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "日本気象協会",
+                "URL": "https://tenki.jp/",
+                "Placement": "toolbar"
+            },
+            {
+                "Title": "radiko",
+                "URL": "https://radiko.jp/",
+                "Placement": "toolbar"
+            }
+        ]
+    }
+}

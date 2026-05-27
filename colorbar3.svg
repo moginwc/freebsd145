@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 縦長カラーバー サンプル -->
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360">
+    <rect x="0"   y="0" width="91" height="360" fill="#bfbfbf"/>
+    <rect x="91 " y="0" width="91" height="360" fill="#ffff00" fill-opacity="0.75"/>
+    <rect x="182" y="0" width="91" height="360" fill="#00ffff" fill-opacity="0.75"/>
+    <rect x="273" y="0" width="91" height="360" fill="#00ff00" fill-opacity="0.75"/>
+    <rect x="364" y="0" width="91" height="360" fill="#ff00ff" fill-opacity="0.75"/>
+    <rect x="455" y="0" width="91" height="360" fill="#ff0000" fill-opacity="0.75"/>
+    <rect x="546" y="0" width="94" height="360" fill="#0000ff" fill-opacity="0.75"/>
+</svg>

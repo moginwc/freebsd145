@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Exec=mlterm --geometry=132x24 --title="端末エミュレータ(vim読み取り専用)" -e vim -R %f
+Name=vim(Thunarから読み取り専用で起動)

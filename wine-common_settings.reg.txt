@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+' 文字コードをUTF-16リトルエンディアン、改行をCR+LFに変換してから使用してください
+
+[HKEY_CURRENT_USER\Software\Wine\X11 Driver]
+"Decorated"="N"

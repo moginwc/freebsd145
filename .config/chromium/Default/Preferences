@@ -1,0 +1,11 @@
+{
+  "download": {
+    "default_directory": "~/Downloads"
+  },
+  "bookmark_bar": {
+    "show_on_all_tabs": true
+  },
+  "browser": {
+    "check_default_browser": false
+  }
+}

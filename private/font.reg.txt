@@ -1,0 +1,14 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Wine\Fonts\Replacements]
+"MS Gothic"="LX Gothic"
+"MS Mincho"="LX Mincho"
+"MS PGothic"="LX P Gothic"
+"MS PMincho"="LX P Mincho"
+"MS Sans Serif"="LX P Gothic"
+"MS Shell Dlg"="Ume UI Gothic"
+"MS UI Gothic"="Ume UI Gothic"
+"ＭＳ Ｐゴシック"="LX P Gothic"
+"ＭＳ Ｐ明朝"="LX P Mincho"
+"ＭＳ ゴシック"="LX Gothic"
+"ＭＳ 明朝"="LX Mincho"

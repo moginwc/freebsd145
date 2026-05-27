@@ -1,0 +1,7 @@
+% Aliases
+/Ryumin-Light     /IPAMincho ;
+/GothicBBB-Medium /IPAGothic ;
+
+% IPA Fonts
+/IPAMincho  << /FileType /TrueType  /CSI [(Japan1) 6]  /Path (/usr/local/share/fonts/ipa/ipam.otf) >> ;
+/IPAGothic  << /FileType /TrueType  /CSI [(Japan1) 6]  /Path (/usr/local/share/fonts/ipa/ipag.otf) >> ;

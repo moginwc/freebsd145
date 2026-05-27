@@ -1,0 +1,96 @@
+# Jail用のディレクトリ、システムファイルを構築する
+su
+mkdir -p /home/jail/jl-web
+cd /home/jail/jl-web
+fetch https://download.freebsd.org/ftp/releases/amd64/14.2-RELEASE/base.txz
+tar -xvpf base.txz
+
+# ネットワーク、タイムゾーンを設定する
+cp /etc/resolv.conf /home/jail/jl-web/etc
+cp /etc/localtime /home/jail/jl-web/etc
+
+# pkgファイルの参照先の固定化
+cp /etc/pkg/FreeBSD.conf /home/jail/jl-web/etc/pkg
+
+# Jail内のFreeBSDのパッチレベルを最新にする
+freebsd-update -b /home/jail/jl-web fetch
+freebsd-update -b /home/jail/jl-web install
+
+# Jail設定ファイルの作成
+vi /etc/jail.conf
+
+jl-web {
+    host.hostname = "jl100001.local";
+    ip4.addr = 192.168.1.108;
+    interface = em0;
+    path = "/home/jail/jl-web";
+    mount.devfs;
+    exec.start = "/bin/sh /etc/rc";
+    exec.stop = "/bin/sh /etc/rc.shutdown";
+    persist;
+}
+
+# FreeBSD起動時にJail機能が使えるように設定する
+vi /etc/rc.conf
+
+jail_enable="YES"
+
+# 再起動する
+shutdown -r now
+
+# 起動確認
+jls
+
+# Jail内にログイン
+sudo jexec jl-web /bin/tcsh
+
+# 以降、Jail内の操作
+
+# パッケージの初期化
+pkg
+
+# Webサーバーのnginxのインストール
+pkg install -y nginx
+
+# 起動設定
+vi /etc/rc.conf
+
+nginx_enable="YES"
+
+# 公開するディレクトリの作成
+mkdir -p /home/www
+
+# テスト用の index.html ファイルを作成する
+vi /home/www/index.html
+
+<h1>Hello Jail World!</h1>
+
+# nginx設定ファイルの編集
+mv /usr/local/etc/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf.org
+vi /usr/local/etc/nginx/nginx.conf
+
+worker_processes 1;
+
+events {}
+
+http {
+    server {
+        listen 80;
+        server_name _;
+
+        root /home/www;
+        index index.html;
+    }
+}
+
+# Jailから抜ける
+exit
+
+# 以降、ホスト側の操作
+sudo vi /etc/pf.conf
+
+# ファイヤーウォールの設定
+pass in on em0 proto tcp to 192.168.1.108 port { 80 } keep state
+
+# 再起動する
+shutdown -r now

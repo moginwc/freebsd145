@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+
+/* === スタイルシート === */
+
+/* === HTML BODY === */
+body {
+  font-family: "IPAGothic"; /* 等幅フォントを設定する(当アプリはIPAGothicのみ検証) */
+  font-size: 18px;
+  background: #555;
+  line-height: 1.6;
+}
+
+/* === 画面構成 (80x20) === */
+#screen {
+  position: relative;
+  width: calc(80 * 1ch);
+  height: calc(20 * 1.6em);
+}
+
+/* === テキスト === */
+.cell {
+  color: #0f0;
+  white-space: pre;
+}
+
+/* === 入力欄 === */
+.input {
+  font-family: inherit;
+  font-size: 1em;
+  color: #0f0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #0f0;
+  outline: none;
+  transform: translateY(0.15em);  /* Y座標の微調整 */
+}
+
+/* === 選択欄 === */
+.selectbox {
+  font-family: inherit;
+  font-size: 1em;
+  color: #0F0;
+  background: #555;
+  border: 1px solid #0F0;
+  transform: translateY(0.15em);   /* Y座標の微調整 */
+}
+
+/* === ボタン === */
+.button {
+  font-family: inherit;
+  font-size: 1em;
+}
+
+</style>
+</head>
+<body>
+<div id="screen"></div>
+<script>
+
+const screen = document.getElementById("screen");
+let currentId = null;
+
+// === 変数初期設定 ===
+const CELL_W = 1;    // ch(文字幅)単位
+const CELL_H = 1.6;  // em(フォント高さ)単位
+
+// === 関数：画面上にテキストを表示する ===
+function put(x, y, text, color="#0F0") {
+  const div = document.createElement("div");
+  div.className = "cell";
+  div.textContent = text;
+
+  pos(div, x, y);
+
+  div.style.color = color;
+
+  screen.appendChild(div);
+}
+
+// === 関数：画面上に入力欄を配置する ===
+function createInput(x, y, width) {
+  const input = document.createElement("input");
+  input.className = "input";
+
+  pos(input, x, y);
+
+  input.style.width = `calc(${width} * ${CELL_W}ch)`;
+
+  screen.appendChild(input);
+  return input;
+}
+
+// === 関数：画面上にボタンを配置する === (x座標と文字とのズレあり)
+function createButton(x, y, label, onclick){
+  const btn = document.createElement("button");
+  btn.className = "button";
+
+  pos(btn, x, y);
+  btn.textContent = label;
+
+  btn.onclick = onclick;
+
+  screen.appendChild(btn);
+  return btn;
+}
+
+// === 関数：画面上に選択メニューを配置する ===
+function createSelect(x, y, w, items){
+  const sel = document.createElement("select");
+  sel.className = "selectbox";
+
+  pos(sel, x, y);
+
+  for(const item of items){
+    const opt = document.createElement("option");
+
+    opt.value = item;
+    opt.textContent = item;
+
+    sel.appendChild(opt);
+  }
+
+  screen.appendChild(sel);
+  return sel;
+}
+
+// === 共通関数：画面上の座標を設定する ===
+function pos(el, x, y){
+  el.style.position = "absolute";
+  el.style.left = `calc(${x} * ${CELL_W}ch)`;
+  el.style.top  = `calc(${y} * ${CELL_H}em)`;
+}
+
+// === データベース操作 ===
+
+// === 関数：指定したレコードを読み込み、画面上に表示する ===
+async function load(id){
+  const r = await fetch(`http://localhost:5000/get/${id}`);
+  const d = await r.json();
+  if(!d.id) return;
+
+  currentId = d.id;
+  rid.value = d.id;
+  name.value = d.name;
+  lat.value = d.lat;
+  lon.value = d.lon;
+  stat.value = d.stat;
+}
+
+// === 関数：新規の空レコードを作成する ===
+async function insert(){
+  const r = await fetch("http://localhost:5000/insert",{method:"POST"});
+  const d = await r.json();
+  await load(d.id);
+}
+
+// === 関数：現在のレコードを更新する ===
+async function update(){
+  if(!currentId) return;
+  await fetch("http://localhost:5000/update",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      id: currentId,
+      name: name.value,
+      lat: lat.value,
+      lon: lon.value,
+      stat: stat.value
+    })
+  });
+}
+
+// === 関数：現在のレコードを削除する ===
+async function del(){
+  if(!currentId) return;
+  await fetch("http://localhost:5000/del",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({id:currentId})
+  });
+//  currentId = null;
+//  name.value="";
+//  lat.value="";
+//  lon.value="";
+//  stat.value="";
+}
+
+// === 関数：次のレコードを読み込み、表示する ===
+async function next(){
+  const r = await fetch(`http://localhost:5000/next/${currentId}`);
+  const d = await r.json();
+
+  load(d.id);
+}
+
+// === 関数：前のレコードを読み込み、表示する ===
+async function prev(){
+  const r = await fetch(`http://localhost:5000/prev/${currentId}`);
+  const d = await r.json();
+
+  load(d.id);
+}
+
+// === 関数：アプリ起動時に最終レコードを読み込み、表示する ===
+async function init(){
+  const r = await fetch("http://localhost:5000/last");
+  const d = await r.json();
+
+  if(d.id){
+    await load(d.id);
+  } else {
+    await insert(); // 存在しない場合は、新規の空レコードを作成する
+  }
+}
+
+// === 関数：現在のレコードを元に、新規にレコードを作成する ===
+async function copyRecord(){
+  if(!currentId) return;
+  const r = await fetch(`http://localhost:5000/copy/${currentId}`, {method: "POST"});
+  const d = await r.json();
+
+  await load(d.id); // 新IDを表示
+}
+
+// === 関数：画面上の緯度・経度から、Google Mapを開く ===
+function openMap(){
+  const latVal = lat.value;
+  const lonVal = lon.value;
+
+  if(!latVal || !lonVal){
+    alert("緯度・経度が未入力です。");
+    return;
+  }
+
+  const url = `https://www.google.com/maps?q=${latVal},${lonVal}&z=15`;
+  window.open(url, "_blank");
+}
+
+// === 関数：クリップボードから、画面上の緯度・経度へペーストする ===
+async function pasteLatLon(){
+  let text;
+  text = await navigator.clipboard.readText();
+  // ブラウザによっては、貼り付けボタンの横にさらに貼り付け(P)が表示されることがある。
+  //        〃           クリップボードの共有を求めてくることがある。
+
+  if(!text.includes(",")){
+    alert("座標形式ではありません。");
+    return;
+  }
+
+  if(!confirm(`緯度・経度を更新しますか？\n\n${text}`)){
+    return;
+  }
+
+  const parts = text.split(",");
+
+  if(parts.length < 2){
+    alert("座標形式が不正です。");
+    return;
+  }
+
+  lat.value = parts[0].trim();
+  lon.value = parts[1].trim();
+
+  await update();
+}
+
+// === 関数：「場所」検索 ===
+async function searchRecord(){
+  const key = prompt("検索文字");
+  if(!key) return;
+
+  const r = await fetch(
+    `http://localhost:5000/search?key=${encodeURIComponent(key)}`
+  );
+  const d = await r.json();
+  if(d.id){
+    load(d.id);
+  }else{
+    alert("見つかりません。");
+  }
+}
+
+// === 画面を作成する(テキスト) ===
+put(22, 0,  "＊＊＊行きたい場所データベース＊＊＊", "#FFF");
+put(0, 1,   "────────────────────────────────────────", "#87ceeb");
+put(2, 2,   "行きたい場所を入力してください。", "#87ceeb");
+put(2, 4,   "ＩＤ ： ");
+put(18, 4,  "*編集不可");
+put(2, 5,   "場所 ： ");
+put(2, 6,   "緯度 ： ");
+put(2, 7,   "経度 ： ");
+put(2, 8,   "状態 ： ");
+put(2, 11,  "※下記の操作は、入力項目にフォーカスがある場合のみ有効。","#87CEEB");
+put(4, 12,  "項目：  TAB/↓/Enter=次へ   Shift+TAB/↑=前へ", "#87CEEB");
+put(4, 13,  "レコード： F2=新規  F3=検索  F4=削除  Ctrl+↑=前へ  Ctrl+↓=次へ  F9=コピー", "#87CEEB");
+put(0, 14,  "────────────────────────────────────────", "#87ceeb");
+put(19, 15, "COPYRIGHT (C) 2026 . ALL RIGHTS RESERVED.","#FFF");
+
+// === 画面を作成する(入力欄、選択メニュー) ===
+const rid    = createInput(11, 4, 4);
+const name   = createInput(11, 5, 24);
+const lat    = createInput(11, 6, 18);
+const lon    = createInput(11, 7, 18);
+const stat   = createSelect(11, 8, 12, ["未訪問", "訪問済み", "保留"]);
+
+// === 選択メニューの状態フィールドで変更があったらデータベースを更新する ===
+stat.addEventListener("change", update);
+
+// === 画面を作成する(ボタン) ===
+createButton(70, 2, "地図表示", openMap);
+createButton(64, 3, "経緯度貼り付け", pasteLatLon);
+
+// === イベント：キー操作メイン ===
+const inputs = [rid, name, lat, lon, stat];
+
+inputs.forEach((input, idx) => {
+  input.addEventListener("keydown", async (e) => {
+
+    if (e.ctrlKey && e.key === "ArrowUp") {
+      e.preventDefault();
+      await update();
+      await prev();
+    }
+    else if (e.ctrlKey && e.key === "ArrowDown") {
+      e.preventDefault();
+      await update();
+      await next();
+    }
+    else if (e.key === "ArrowUp" || (e.shiftKey && e.key === "Tab")) {
+      e.preventDefault();
+      await update();
+      move(idx - 1);
+    }
+    else if (e.key === "Enter" || e.key === "ArrowDown" || e.key === "Tab") {
+      e.preventDefault();
+      await update();
+      move(idx + 1);
+    }
+    else if (e.key === "F2") {
+      e.preventDefault();
+      await insert();
+      name.focus();
+      stat.selectedIndex = 0;
+    }
+    else if (e.key === "F3") {
+      e.preventDefault();
+      searchRecord();
+      rid.focus();
+    }
+    else if (e.key === "F4") {
+      e.preventDefault();
+      if(!confirm("削除しますか？")) return;
+      await del();
+      await init();
+    }
+    else if (e.key === "F9") {
+      e.preventDefault();
+      await update();
+      await copyRecord();
+    }
+  });
+});
+
+// === 関数：入力欄・選択メニューのフォーカスを移動する ===
+function move(i) {
+  if (i < 0) i = inputs.length - 1;
+  if (i >= inputs.length) i = 0;
+
+  // フォーカス
+  inputs[i].focus();
+
+  // 入力欄であれば、全内容を選択する
+  if(typeof inputs[i].select === "function"){
+    inputs[i].select();
+  }
+}
+
+// === 初期化 ===
+init();
+
+// === 初期フォーカス＋ID欄編集禁止 ===
+rid.focus();
+rid.readOnly = true;
+
+</script>
+</body>
+</html>

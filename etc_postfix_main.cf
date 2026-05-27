@@ -1,0 +1,8 @@
+mydomain = localmail
+myorigin = $mydomain
+mydestination = $mydomain
+append_dot_mydomain = no
+home_mailbox = Maildir/
+smtpd_relay_restrictions = permit_mynetworks, reject_unauth_destination
+mynetworks = 192.168.1.0/24, 127.0.0.0/8
+default_transport = error

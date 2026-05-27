@@ -1,0 +1,34 @@
+.TH SCROT-TIPS 7 "2025年11月" "個人メモ" "ユーザーガイド"
+.SH 【名前】
+scrot-tips \- よく使うscrotコマンドの例集
+.SH 【使用例】
+.TP
+画面全体をキャプチャする：
+.EX
+% scrot filename.png
+.EE
+.TP
+アクティブウインドウをキャプチャする：
+.EX
+% scrot -b -u filename.png
+.EE
+.TP
+アクティブウインドウの内側をキャプチャする：
+.EX
+% scrot -u filename.png
+.EE
+.TP
+選択した部分をキャプチャする（全画面・ウインドウ・範囲）：
+.EX
+% scrot -s filename.png
+.EE
+.SH 【オプション】
+.TP
+.BI "-d " 秒数
+指定した秒数後にキャプチャする。
+.TP
+.BI "-f " 書式
+ファイル名の書式を指定する。例えば "%Y%m%d%H%M%S.png" のように指定する。
+.TP
+.BI "-p"
+マウスカーソルを含めてキャプチャする。

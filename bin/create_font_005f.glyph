@@ -1,0 +1,9 @@
+    <TTGlyph name="underscore" xMin="0" yMin="-288" xMax="1024" yMax="-141">
+      <contour>
+        <pt x="1024" y="-288" on="1"/>
+        <pt x="0" y="-288" on="1"/>
+        <pt x="0" y="-141" on="1"/>
+        <pt x="1024" y="-141" on="1"/>
+      </contour>
+      <instructions/>
+    </TTGlyph>

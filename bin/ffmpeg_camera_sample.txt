@@ -1,0 +1,61 @@
+# 外付けカメラの画像をキャプチャしたい（静止画1枚）
+ffmpeg -f video4linux2 -i /dev/video0 -vframes 1 snapshot.jpg
+
+# 外付けカメラの画像をキャプチャしたい（画質安定版、静止画1枚）
+ffmpeg -f video4linux2 -framerate 30 -i /dev/video0 -ss 3 -vframes 1 -y snapshot.jpg
+
+# 外付けカメラの画像をキャプチャしたい（画質安定版、静止画、1秒ごと）
+ffmpeg -f video4linux2 -framerate 30 -i /dev/video0 -vf "fps=1" snapshot_%04d.jpg
+
+# 外付けカメラの画像をキャプチャしたい（画質安定版、静止画、1秒ごと、日時付き）
+ffmpeg -f video4linux2 -framerate 30 -i /dev/video0 \
+  -vf "fps=1, \
+  drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
+  text='%{localtime}': fontcolor=white: fontsize=24: box=1: \
+  boxcolor=black@0.5: x=w-tw-8: y=h-th-8" \
+  snapshot_%05d.jpg
+
+# 外付けカメラの映像を録画したい（動画、音声なし、30秒間）
+ffmpeg -f video4linux2 -framerate 15 -i /dev/video0 -t 00:00:30 \
+  output.mp4
+
+# 外付けカメラ録画に日時を埋め込みたい（動画、音声なし、30秒間、日時付き）
+ffmpeg -f video4linux2 -framerate 15 -i /dev/video0 -t 00:00:30 \
+  -vf "drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
+  text='%{localtime}': fontcolor=white: fontsize=24: box=1: \
+  boxcolor=black@0.5: x=w-tw-8: y=h-th-8" \
+  output.mp4
+
+# 外付けカメラの映像をそのまま見たい
+sudo pkg install -y mpv
+mpv av://v4l2:/dev/video0 \
+  --demuxer-lavf-o=video_size=640x480
+
+# 外付けカメラの映像をそのまま見たい＋音声も聞きたい
+ffmpeg -f v4l2 -video_size 640x480 -i /dev/video0 \
+  -f oss -i /dev/dsp4 \
+# -vf "scale=640:360"
+  -c:v rawvideo -c:a pcm_s16le -f nut - | \
+  mpv -
+
+# 外付けカメラの映像をYouTubeで配信したい
+ffmpeg \
+  -f v4l2 -framerate 30 -video_size 640x480 -i /dev/video0 \
+  -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 \
+  -shortest \
+  -vcodec libx264 -pix_fmt yuv420p -preset veryfast -g 60 -b:v 2500k \
+  -acodec aac -b:a 128k -ar 44100 \
+  -f flv rtmp://a.rtmp.youtube.com/live2//****-****-****-****-****
+
+# 外付けカメラの映像をYouTubeで配信したい（日付時刻入り）
+ffmpeg \
+  -f v4l2 -framerate 30 -video_size 640x480 -i /dev/video0 \
+  -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=44100 \
+  -shortest \
+  -vcodec libx264 -pix_fmt yuv420p \
+  -preset veryfast -g 60 -b:v 2500k \
+  -acodec aac -b:a 128k -ar 44100 \
+  -vf "drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
+      text='%{localtime}': fontsize=32: fontcolor=white: x=16: y=16" \
+  -f flv rtmp://a.rtmp.youtube.com/live2/****-****-****-****-****
+

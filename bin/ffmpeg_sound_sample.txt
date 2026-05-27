@@ -1,0 +1,40 @@
+# 時刻付き録音
+ffmpeg \
+  -f oss -i /dev/dsp0 \
+  -f lavfi -i color=color=black:size=640x240 \
+  -t 00:00:30 \
+  -vf "drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
+      text='%{localtime}': fontsize=32: fontcolor=white: x=48: y=48" \
+  -c:v libx264 -c:a aac -shortest output.mp4
+
+# 時刻＋波形付き録音
+ffmpeg \
+  -f oss -i /dev/dsp0 \
+  -f lavfi -i color=color=black:size=640x240 \
+  -filter_complex "\
+    [0:a]showwaves=s=640x120:mode=line:rate=25:colors=lime[wave]; \
+    [1:v][wave]overlay=0:H/2, \
+    drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
+      text='%{localtime}':fontsize=32:fontcolor=white:x=48:y=48\
+  " \
+  -c:v libx264 -c:a aac \
+  -t 00:00:30 \
+  output_with_wave.mp4
+
+# 10分ごとにファイルを分割して長時間録音
+ffmpeg \
+    -f oss -i /dev/dsp0 \
+    -ac 1 -ar 22050 -b:a 32k \
+    -f segment \
+    -segment_time 600 \
+    -strftime 1 \
+    ./radio_%Y%m%d_%H%M%S.mp3
+
+# 10分ごとにファイルを分割して録音し、直近の12時間のみ保存
+ffmpeg \
+    -f oss -i /dev/dsp0 \
+    -ac 1 -ar 22050 -b:a 32k \
+    -f segment \
+    -segment_time 600 \
+    -segment_wrap 72 \
+    radio_%03d.mp3

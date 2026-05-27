@@ -1,0 +1,19 @@
+decorations 0
+height 352
+width 264
+confirm_destroy 1
+edit_lock 0
+sticky_on_start 0
+back_red 63993
+back_green 63736
+back_blue 40349
+use_back 1
+text_red 0
+text_green 0
+text_blue 0
+use_text 1
+fontname IPAPGothic 9
+toolbar 1
+auto_hide_toolbar 1
+scrollbar 0
+buttons New, Delete, Close

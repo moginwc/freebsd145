@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=SHA256ハッシュを表示します
+Exec=xfce4-terminal -e 'tcsh -c "sha256sum %F; stty -icanon; dd bs=1 count=1"'
+#Exec=mlterm -e tcsh -c 'sha256sum %F; bash -c "read -n 1"'
