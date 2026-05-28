@@ -13,14 +13,13 @@ set ver = "freebsd145"
 # インストール選択画面の表示
 set selected = `dialog \
 	--title "FreeBSD Custom Installer" \
-    --stdout \
+	--stdout \
 	--checklist "Select your options:" 14 76 6 \
 	use_amdgpu "Use AMD GPU driver (Default: Intel GPU driver)" off \
 	use_re0 "LAN interface: re0 (Default: em0)" off \
 	use_jp_keyboard "Keyboard layout: 106 JP (Default: 101 US)" off \
 	enable_numlock "Enable NumLock for X (Default: Off)" off \
-	use_volume_keys "Use volume keys (Default: ALT+CTRL+↑,↓,M)" off \
-    build_mlterm_uim "Build mlterm with uim (Default: pkg only)" off`
+	use_volume_keys "Use volume keys (Default: ALT+CTRL+↑,↓,M)" off`
 
 # システム起動時に ntpdが起動するよう設定する (3.初期設定 ntpd)
 sudo service ntpd enable
@@ -59,12 +58,6 @@ sed -i '' 's/^##//g' ~/.login
 
 # X Window System をインストールする (3.初期設定 ウインドウ関係1)
 sudo pkg install -y -q xorg
-
-# ウィンドウマネージャをインストールする
-mkdir -p ~/icons
-cp ./third_party/programs.xpm ~/icons
-sudo pkg install -y -q ImageMagick7
-magick ~/icons/programs.xpm -trim +repage -scale 200% ~/icons/programs.png
 sudo pkg install -y -q fvwm3
 sudo pkg install -y -q ja-font-ipa
 
@@ -76,13 +69,16 @@ if (" ${selected:q} " =~ "* use_jp_keyboard *") then
 	sed -i '' 's/^xkbcomp /#xkbcomp /g' ~/.xinitrc
 endif
 
-cp ./.fvwm2rc ~
-sed -i '' 's/^##//g' ~/.fvwm2rc
+＃ FVWM3の設定ファイルのコピー
+mkdir ~/.fvwm
+cp ./.fvwm/config ~/.fvwm
+sed -i '' 's/^##//g' ~/.fvwm/config
 
-# 端末エミュレータのインストールと設定 (8-25. mltermを使いたい いったんpkg版をインストール)
-sudo pkg install -y -q mlterm
-cp -r ./.mlterm ~
-cp ./third_party/xterm-sol.xpm ~/icons
+# アイコンファイルの作成
+mkdir -p ~/icons
+cp ./third_party/programs.xpm ~/icons
+sudo pkg install -y -q ImageMagick7
+magick ~/icons/programs.xpm -trim +repage -scale 200% ~/icons/programs.png
 magick ~/icons/xterm-sol.xpm -crop 44x34+5+2 ~/icons/xterm-sol.png
 
 # (9-13.)GTK系アプリのデフォルトフォントを変更したい
@@ -93,13 +89,24 @@ cp ./.config/gtk-3.0/settings.ini ~/.config/gtk-3.0/
 # (9-14.)フォントのアンチエイリアスをグレースケール方式にしたい(GTK2系)
 cp ./.Xresources ~
 
-# 端末エミュレータのインストールと設定 (3.初期設定 端末エミュレータ 端末エミュレータの設定)
-sudo pkg install -y -q xfce4-terminal
-mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml
-cp ./.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml ~/.config/xfce4/xfconf/xfce-perchannel-xml/
-
 # 入力メソッド・日本語入力システムのインストールと設定 (3.初期設定 日本語入力1,2)
 sudo pkg install -y -q ja-uim-anthy-unicode uim-gtk2 uim-gtk3 uim-qt5 uim-qt6
+
+# 端末エミュレータのインストールと設定 (8-25. mltermを使いたい いったんpkg版をインストール)
+sudo pkg install -y -q mlterm
+sudo git clone --depth 1 --branch 2026Q1 https://git.FreeBSD.org/ports.git /usr/ports
+sudo mkdir -p /var/db/ports/x11_mlterm/
+sudo cp ~/${ver}/var_db_ports_x11_mlterm_options /var/db/ports/x11_mlterm/options 
+cd /usr/ports/x11/mlterm
+sudo env BATCH=yes make
+sudo env BATCH=yes make reinstall
+cd ~/${ver}
+cp -r ./.mlterm ~
+
+# 9-10.クリップボードの不具合を解決したい
+sudo pkg install -y -q autocutsel
+
+# [CpasLock]キーを[半角/全角]キーに割り当てる
 cp -r ./.xkb ~
 
 # 入力メソッド・日本語入力システムの初期設定 (3.初期設定 日本語入力3相当)
@@ -107,16 +114,31 @@ cp -r ./.uim.d-anthy ~
 mv ~/.uim.d-anthy ~/.uim.d
 
 # ユーザー辞書ファイルの作成
-mkdir -p ~/.anthy
-## touch ~/.anthy/private_words_default
-cp -r ./.anthy ~
+mkdir -p ~/.config/anthy
+cp -r ./.config/anthy ~/.config/
 
 # アプリのインストール (3.初期設定 Firefox、その他)
 sudo pkg install -y -q firefox-esr
 sudo pkg install -y -q scrot
 sudo pkg install -y -q xlockmore
-sudo pkg install -y -q lupe
 sudo pkg install -y -q xpad3
+
+# 拡大鏡のインストール
+sudo pkg install -y py311-tkinter py311-pillow
+mkdir -p ~/bin
+cp ./bin/pixel_loupe.py ~/bin
+
+# 3.初期設定 (音量キー設定)
+if (" ${selected:q} " =~ "* use_volume_keys *") then
+	sed -i '' 's/^#volume_keys_true#//g' ~/.fvwm2rc
+else
+	sed -i '' 's/^#volume_keys_false#//g' ~/.fvwm2rc
+endif
+
+
+
+
+
 
 # 8-3. Firefoxで、ダウンロードフォルダーを「~/Downloads」に変更したい
 # 8-10. Firefoxの初期設定を、起動せずに行いたい
@@ -135,21 +157,13 @@ cp ./bin/volume_osd_daemon.py ~/bin/
 chmod +x ~/bin/volume_osd_client.tcsh
 sudo pkg install -y -q webfonts
 
-# 3.初期設定 (音量キー設定)
-if (" ${selected:q} " =~ "* use_volume_keys *") then
-	sed -i '' 's/^#volume_keys_true#//g' ~/.fvwm2rc
-else
-	sed -i '' 's/^#volume_keys_false#//g' ~/.fvwm2rc
-endif
-
 # 6-7.NumLockを効かせたい
 if (" ${selected:q} " =~ "* enable_numlock *") then
 	sudo pkg install -y -q numlockx
 	sed -i '' 's/^#numlock#//g' ~/.xinitrc
 endif
 
-# 9-10.クリップボードの不具合を解決したい
-sudo pkg install -y -q autocutsel
+
 
 # 5-4.ログインした際のメッセージを、Last login以外、表示させない
 sudo mv /etc/motd.template /etc/motd.template.old
@@ -277,19 +291,6 @@ endif
 popd
 popd
 
-# 端末エミュレータのインストールと設定 (8-25. mltermを使いたい コンパイル)
-if (" ${selected:q} " =~ "* build_mlterm_uim *") then
-    sudo git clone https://git.FreeBSD.org/ports.git /usr/ports
-    cd /usr/ports
-    sudo git checkout 2026Q1
-    sudo mkdir -p /var/db/ports/x11_mlterm/
-    sudo cp ~/${ver}/var_db_ports_x11_mlterm_options /var/db/ports/x11_mlterm/options 
-    cd /usr/ports/x11/mlterm
-    sudo env BATCH=yes make
-    sudo env BATCH=yes make reinstall
-    sed -i '' 's/^#mlterm#//g' ~/.fvwm2rc
-    cd ~/${ver}
-endif
 
 # サンプル画像のコピー
 mkdir ~/Pictures
