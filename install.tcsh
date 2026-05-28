@@ -131,9 +131,9 @@ cp ./bin/pixel_loupe.py ~/bin
 
 # 3.初期設定 (音量キー設定)
 if (" ${selected:q} " =~ "* use_volume_keys *") then
-	sed -i '' 's/^#volume_keys_true#//g' ~/.fvwm2rc
+	sed -i '' 's/^#volume_keys_true#//g' ~/.fvwm/config
 else
-	sed -i '' 's/^#volume_keys_false#//g' ~/.fvwm2rc
+	sed -i '' 's/^#volume_keys_false#//g' ~/.fvwm/config
 endif
 
 
