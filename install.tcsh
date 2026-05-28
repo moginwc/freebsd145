@@ -77,6 +77,7 @@ sed -i '' 's/^##//g' ~/.fvwm/config
 # アイコンファイルの作成
 mkdir -p ~/icons
 cp ./third_party/programs.xpm ~/icons
+cp ./third_party/xterm-sol.xpm ~/icons
 sudo pkg install -y -q ImageMagick7
 magick ~/icons/programs.xpm -trim +repage -scale 200% ~/icons/programs.png
 magick ~/icons/xterm-sol.xpm -crop 44x34+5+2 ~/icons/xterm-sol.png
