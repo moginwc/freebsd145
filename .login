@@ -11,6 +11,9 @@ if ( -x /usr/bin/resizewin ) /usr/bin/resizewin -z
 # Display a random cookie on each login.
 #if ( -x /usr/bin/fortune ) /usr/bin/fortune freebsd-tips
 
+setenv LANG ja_JP.UTF-8
+setenv LC_ALL ja_JP.UTF-8
+
 ##if ( $?SSH_CLIENT == 0 && $?SSH_TTY == 0 && $?DISPLAY == 0 ) then
 ##    # backlight 3
 ##    startx
