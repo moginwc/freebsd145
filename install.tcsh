@@ -5,7 +5,7 @@
 #-----------------------------------------
 
 # リポジトリ名
-    set ver = "freebsd144"
+    set ver = "freebsd145"
 
 # インストール選択画面の表示
     set selected = `dialog \
