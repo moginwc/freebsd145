@@ -167,10 +167,10 @@
 
 # 5-5.起動時のブートメニューやメッセージをできるだけ表示させない
 
-# BIOSブート向け
+    # BIOSブート向け
     sudo cp ./root_boot.config /boot.config
 
-# UEFIブート向け
+    # UEFIブート向け
     grep '^boot_mute=' /boot/loader.conf > /dev/null
     if ( $status == 0 ) then
         sudo sed -i '' 's/^boot_mute=.*/boot_mute="YES"/' /boot/loader.conf
@@ -184,7 +184,7 @@
         echo 'splash="/boot/images/freebsd-brand-rev.png"' | sudo tee -a /boot/loader.conf
     endif
 
-# 共通
+    # 共通
     grep '^autoboot_delay=' /boot/loader.conf > /dev/null
     if ( $status == 0 ) then
         sudo sed -i '' 's/^autoboot_delay=.*/autoboot_delay="-1"/' /boot/loader.conf
@@ -374,6 +374,7 @@
     sudo service samba_server enable
     mkdir -p ~/share
     sudo cp etc_smb4.conf /usr/local/etc/smb4.conf
+    echo "Please enter a password for file sharing."
     sudo pdbedit -a -u pcuser
 
 # おわり
