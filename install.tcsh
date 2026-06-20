@@ -140,7 +140,7 @@
 
 # コンソールでの日本語表示設定
     pushd /usr/share/vt/fonts
-    fetch https://people.freebsd.org/~emaste/newcons/b16.fnt
+    sudo fetch https://people.freebsd.org/~emaste/newcons/b16.fnt
     popd
     sudo sysrc font8x16="b16.fnt"
 
