@@ -5,7 +5,7 @@
 	<name>ここで Terminal を開く</name>
 	<submenu></submenu>
 	<unique-id>1</unique-id>
-	<command>xfce4-terminal --working-directory %f</command>
+	<command>mlterm --working-directory %f</command>
 	<description></description>
 	<range></range>
 	<patterns>*</patterns>
