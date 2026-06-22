@@ -26,3 +26,5 @@ usr/local/etc/postfix/main.cf.org
 usr/local/etc/dovecot/dovecot.conf
 home/pcuser_ml
 etc/aliases
+usr/local/share/ghostscript/10.06.0/Resource/CIDFont
+usr/local/share/ghostscript/10.06.0/Resource/Font
