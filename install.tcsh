@@ -215,6 +215,13 @@
         echo "$addstr" | sudo tee -a /etc/rc.conf
     endif
 
+# 5-15.有線LANでDHCPを使いたい *コメントアウト状態にて
+    set addstr = '#ifconfig_em0="DHCP"'
+    grep -F -- "$addstr" /etc/rc.conf > /dev/null
+    if ( $status != 0 ) then
+        echo "$addstr" | sudo tee -a /etc/rc.conf
+    endif
+
 # 6-6.スピーカーやイヤホン端子から音が出るようにしたい *コメントアウト状態にて
     set addstr = '#hw.snd.default_unit=0'
     grep -F -- "$addstr" /etc/rc.conf > /dev/null
@@ -314,6 +321,7 @@
     sed -i '' 's/平文テキストドキュメント/テキストファイル/g' ~/.local/share/mime/packages/freedesktop.org.xml
     sed -i '' 's/平文文書/テキストファイル/g' ~/.local/share/mime/packages/freedesktop.org.xml
     sed -i '' 's/目的符号文書/オブジェクトファイル/g' ~/.local/share/mime/packages/freedesktop.org.xml
+    rehash
     update-mime-database ~/.local/share/mime
 
 # 8-26. 軽量画像ビュアnsxivをカスタマイズして使いたい
