@@ -176,6 +176,7 @@ AddToMenu Programs    "プログラム"                      Title
 #+                     "端末エミュレータ 132x24..."      Exec xfce4-terminal --geometry=132x24 --title=端末エミュレータ
 +                     ""                                Nop
 ##+                     "ファイルマネージャ..."           Exec dbus-launch thunar
+##+                     "テキストエディタ..."             Exec leafpad
 #wine#+                     "テキストエディタ..."             Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
 #+                     "メールツール..."                 Exec sylpheed
 ##+                     "メールツール..."                 Exec chrome --no-default-browser-check https://mail.google.com/mail/
