@@ -22,6 +22,9 @@
 # 基本設定
 #----------
 
+# sudo認証
+    sudo -v || exit 1
+
 # システム起動時に ntpdが起動するよう設定する (3.初期設定 ntpd)
     sudo service ntpd enable
     sudo cp ./etc_ntp.conf /etc/ntp.conf
@@ -374,7 +377,7 @@
 # 13-12.自作のmanページを作成したい
     cp -r ./man ~
 
-#おまけ. 文字コード表
+# おまけ. 文字コード表
     cp -r ./html ~
 
 # 7-3.Windowsやmacとファイル共有したい(SMB) # この行はシェルの最後に配置する(パスワード入力があるため)
