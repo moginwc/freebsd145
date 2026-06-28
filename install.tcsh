@@ -354,6 +354,11 @@
     magick ./colorbar4.svg ~/Pictures/colorbar4.png
     cp /usr/local/share/doc/ImageMagick-7/images/mountains*.jpg ~/Pictures/
 
+# 8-43. シンプルなGUIテキストエディタを使いたい(leafpad)
+    sudo pkg install -y -q leafpad
+    mkdir -p ~/.config/leafpad
+    cp ./.config/leafpad/leafpadrc ~/.config/leafpad/
+
 # 9-19. 音量調整時に、画面上に音量・ミュート状態を表示したい
     mkdir -p ~/bin
     cp ./bin/volume_osd_client.tcsh ~/bin/
