@@ -1,0 +1,29 @@
+.TH SERVICE-TIPS 7 "2026年07月" "個人メモ" "ユーザーガイド"
+.SH 【名前】
+service-tips \- よく使うserviceコマンドの例集
+.SH 【使用例】
+.TP
+pf が自動起動できるように /etc/rc.conf を設定する：
+.EX
+% sudo service pf enable
+.EE
+.TP
+/etc/rc.conf に pf_rules=/etc/pf.conf を設定する：
+.EX
+% sudo sysrc pf_rules+="/etc/pf.conf"
+.EE
+.TP
+pf サービスを起動する（現在停止中の場合）：
+.EX
+% sudo service pf start
+.EE
+.TP
+pf サービスを停止後、再起動する（設定変更後など）：
+.EX
+% sudo service pf restart
+.EE
+.TP
+pf サービスを停止せずに設定変更を反映する：
+.EX
+% sudo service pf reload
+.EE
