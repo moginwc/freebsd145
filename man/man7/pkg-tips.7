@@ -37,3 +37,8 @@ pkg install後に表示されるメッセージを再表示する:
 .EX
 % pkg which `which \fIコマンド名\fR`
 .EE
+.TP
+直近インストールしたパッケージ名を表示する（例）:
+.EX
+% grep 'pkg' /var/log/messages | tail -10
+.EE
