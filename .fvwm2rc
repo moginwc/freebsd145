@@ -49,26 +49,12 @@ AddToFunc Func-LaunchOrRaise_mlterm
 + I Next (mlterm) Focus
 + I None (mlterm) Exec mlterm --geometry=80x24 --title="端末エミュレータ"
 
-# ランチャー(xfce4-terminal) 起動またはフォーカスする
-DestroyFunc Func-LaunchOrRaise_xfce4terminal
-AddToFunc Func-LaunchOrRaise_xfce4terminal
-+ I All (xfce4-terminal) Raise
-+ I Next (xfce4-terminal) Focus
-+ I None (xfce4-terminal) Exec xfce4-terminal --geometry=80x24 --title="端末エミュレータ"
-
 # ランチャー(conky) 起動またはフォーカスする
 DestroyFunc Func-LaunchOrRaise_conky
 AddToFunc Func-LaunchOrRaise_conky
 + I All  (conky) Raise
 + I Next (conky) Focus
 + I None (conky) Exec conky
-
-# ランチャー(hidemaru.exe) 起動またはフォーカスする
-DestroyFunc Func-LaunchOrRaise_hidemaru
-AddToFunc Func-LaunchOrRaise_hidemaru
-+ I All  (hidemaru.exe) Raise
-+ I Next (hidemaru.exe) Focus
-+ I None (hidemaru.exe) Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
 
 #----------------------------------------------------------------------
 # 2: スタイル
@@ -121,7 +107,6 @@ Style * Lenience
 # - StackTransientParent: ダイアログが親ウィンドウの上に表示されるようにする
 # - FPReleaseFocusTransient: ダイアログが閉じたらフォーカスを親に戻す
 Style * DecorateTransient
-#wine#Style "*.exe" !DecorateTransient
 Style * StackTransientParent
 Style * FPReleaseFocusTransient
 
@@ -172,12 +157,9 @@ AddToMenu RootMenu    "ワークスペース"                  Title
 AddToMenu Programs    "プログラム"                      Title
 +                     "端末エミュレータ 80x24..."       Exec mlterm --title=端末エミュレータ
 +                     "端末エミュレータ 132x24..."      Exec mlterm --geometry=132x24 --title=端末エミュレータ
-#+                     "端末エミュレータ 80x24..."       Exec xfce4-terminal --title=端末エミュレータ
-#+                     "端末エミュレータ 132x24..."      Exec xfce4-terminal --geometry=132x24 --title=端末エミュレータ
 +                     ""                                Nop
 ##+                     "ファイルマネージャ..."           Exec dbus-launch thunar
 ##+                     "テキストエディタ..."             Exec leafpad
-#wine#+                     "テキストエディタ..."             Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
 #+                     "メールツール..."                 Exec sylpheed
 ##+                     "メールツール..."                 Exec chrome --no-default-browser-check https://mail.google.com/mail/
 +                     "カレンダ..."                     Exec xterm -geometry 70x38 -T カレンダ -e tcsh -c "cal -y; stty -icanon; dd bs=1 count=1"
@@ -207,11 +189,11 @@ AddToMenu Utilities   "ユーティリティ"                  Title
 +                     "再表示"                          Refresh
 +                     "ウィンドウマネージャの再起動..." Restart
 +                     "ロックスクリーン"                Exec xlock -mode blank -mousemotion -timeout 10
-+                     "拡大鏡..."                        Exec python3.11 $HOME/bin/pixel_loupe.py
++                     "拡大鏡..."                        Exec lupe
+##+                     "拡大鏡..."                        Exec python3.11 $HOME/bin/pixel_loupe.py
 ##+                     "文字コード表..."                 Exec firefox $HOME/html/cp932map.html
 +                     "入力メソッドの設定..."           Exec uim-pref-gtk3
 +                     "日本語入力システム設定..."       Exec uim-pref-gtk3
-#+                     "日本語入力システム設定..."       Exec env QT_IM_MODULE= mozc_tool config_dialog
 
 AddToMenu Window-Ops  "移動"                            Move
 +                     "サイズ変更"                      Resize
@@ -258,21 +240,6 @@ AddToMenu mlterm_menu
 +                     "mlterm"                              Title
 +                     "新規ウインドウ 80x24"                Exec mlterm --geometry=80x24 --title=端末エミュレータ
 +                     "新規ウインドウ 132x24"               Exec mlterm --geometry=132x24 --title=端末エミュレータ
-+                     "新規ウインドウ 80x24 (曖昧幅:半角)"  Exec mlterm --geometry=80x24 --title="端末エミュレータ - 曖昧幅:半角" --ac=1
-#+                     "上下分割レイアウト tmux"             Exec mlterm --geometry=132x50 --title=端末エミュレータ -e tmux new-session \; split-window -v \; select-pane -t 0
-#+                     "1-2分割レイアウト tmux"              Exec mlterm --geometry=161x34 --title=端末エミュレータ -e tmux new-session \; split-window -h \; select-pane -t 1 \; split-window -v \; attach \; select-pane -t 0
-# ランチャー(xfce4-terminal)右クリックメニュー
-AddToMenu xfce4terminal_menu
-+                     "xfce4-terminal"               Title
-+                     "新規ウインドウ 80x24"            Exec xfce4-terminal --geometry=80x24 --title=端末エミュレータ
-+                     "新規ウインドウ 132x24"           Exec xfce4-terminal --geometry=132x24 --title=端末エミュレータ
-
-# ランチャー(hidemaru)右クリックメニュー
-AddToMenu hidemaru_menu
-+                     "秀丸エディタ"                    Title
-+                     "新規ドキュメント"                Exec wine $HOME/.wine/drive_c/Program\ Files/Hidemaru/Hidemaru.exe
-+                     ""                                Nop
-+                     "終了"                            All (hidemaru.exe) Close
 
 #----------------------------------------------------------------------
 # 5: マウスとキー設定
@@ -404,11 +371,6 @@ Style "QuitVerify" NoTitle, NoHandles, BorderWidth 5
 ##*FvwmButtons: (Icon "firefox.png",   Action (Mouse 1) Func-LaunchOrRaise_firefox,  Action (Mouse 3) Menu firefox_menu)
 ##*FvwmButtons: (Icon "chrome.png",    Action (Mouse 1) Func-LaunchOrRaise_chromium, Action (Mouse 3) Menu chromium_menu)
 ##*FvwmButtons: (Icon "xterm-sol.png", Action (Mouse 1) Func-LaunchOrRaise_mlterm,   Action (Mouse 3) Menu mlterm_menu)
-
-#*FvwmButtons: (Icon "xfce4-terminal.png", Action (Mouse 1) Func-LaunchOrRaise_xfce4terminal, Action (Mouse 3) Menu xfce4terminal_menu)
-
-# wineサンプル
-#wine#*FvwmButtons: (Icon "hidemaru.png",  Action (Mouse 1) Func-LaunchOrRaise_hidemaru, Action (Mouse 3) Menu hidemaru_menu)
 
 ##*FvwmButtons: (Swallow "xload" 'Exec xload -update 3 -nolabel -bg \\#cecece', Action(Mouse 1) Func-LaunchOrRaise_conky)
 ##*FvwmButtons: (Swallow "xbatt" 'Exec xbatt -bg \\#cecece', Padding 0 2)
