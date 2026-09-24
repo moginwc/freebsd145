@@ -1,0 +1,26 @@
+set folder="."
+set index_format="%4C  %[%Y-%m-%d]  %-24.24L  (%?l?%4l&%4c?)  %s"
+set pager_format="%4C  %[%Y-%m-%d]  %-24.24L  (%?l?%4l&%4c?)  %s%* -- (%P)"
+set status_format="-%r-%v: %f [Msgs:%?M?%M/?%m] %>-(%P)---"
+set sort=reverse-date
+set pager_stop
+set markers=no
+set simple_search="~B %s"
+set help=no
+
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager <left>     previous-page
+bind pager <right>    next-page
+bind pager <return> exit
+bind index <space> next-page
+
+ignore *
+unignore from to cc subject date reply-to
+hdr_order From: To: Cc: Subject: Date: Reply-To:
+
+color normal    black default
+color status    blue brightwhite
+color hdrdefault black default
+color quoted black default
+color indicator default brightwhite
