@@ -1,15 +1,16 @@
 # 時刻付き録音
-ffmpeg \
+set START = `date +%s.%N` ; \
+ffmpeg -y \
   -f oss -i /dev/dsp0 \
-  -f lavfi -i color=color=black:size=640x240 \
+  -f lavfi -i color=color=black:size=640x240:rate=1 \
   -t 00:00:30 \
   -vf "drawtext=fontfile=/usr/local/share/fonts/ipa/ipag.otf: \
-      text='%{localtime}': fontsize=32: fontcolor=white: x=48: y=48" \
-  -c:v libx264 -c:a aac -shortest output.mp4
+      text='%{pts\:localtime\:$START}':fontsize=32:fontcolor=white:x=48:y=48" \
+  -c:v libx264 -c:a aac \
+  output.mp4
 
 # 時刻＋波形付き録音
-ffmpeg \
-  -y \
+ffmpeg -y \
   -f oss -i /dev/dsp0 \
   -f lavfi -i color=color=black:size=640x240 \
   -filter_complex "\
