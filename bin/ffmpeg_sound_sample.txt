@@ -9,6 +9,7 @@ ffmpeg \
 
 # 時刻＋波形付き録音
 ffmpeg \
+  -y \
   -f oss -i /dev/dsp0 \
   -f lavfi -i color=color=black:size=640x240 \
   -filter_complex "\
