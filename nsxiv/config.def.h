@@ -192,10 +192,10 @@ static const keymap_t keys[] = {
 	{ 0, XK_Left,  i_navigate, -1 },   /* ←キーで前画像 */
 	{ 0, XK_Up,    i_navigate, -1 },   /* ↑キーで前画像 */
 	{ 0, XK_space, g_switch_mode, None }, /* Spaceでサムネイル画面へ */
-	{ 0, XK_Escape, g_switch_mode, None }, /* ESCでサムネイル画面へ */
+	{ 0, XK_Escape, g_switch_mode, None }, /* Escでサムネイル画面へ */
 	/* サムネイル表示モード */
-	{ 0, XK_Prior, g_scroll_screen, DIR_UP },    /* PgUp */
-	{ 0, XK_Next,  g_scroll_screen, DIR_DOWN },  /* PgDn */
+	{ 0, XK_Prior, g_scroll_screen, DIR_UP },    /* Page Up */
+	{ 0, XK_Next,  g_scroll_screen, DIR_DOWN },  /* Page Down */
 
 };
 
