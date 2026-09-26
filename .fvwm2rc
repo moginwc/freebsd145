@@ -8,7 +8,7 @@ AddToFunc   Func-TitleMouse I Raise
 +                           M Move
 +                           D Maximize
 
-# CTRLキーを押しながら
+# Ctrlキーを押しながら
 # タイトルバーをクリック・ドラッグ・ダブルクリックした時の動作
 ##DestroyFunc Func-TitleMouseCtrl
 ##AddToFunc   Func-TitleMouseCtrl I Raise
