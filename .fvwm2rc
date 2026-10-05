@@ -158,7 +158,7 @@ AddToMenu Programs    "プログラム"                      Title
 +                     "端末エミュレータ 80x24..."       Exec mlterm --title=端末エミュレータ
 +                     "端末エミュレータ 132x24..."      Exec mlterm --geometry=132x24 --title=端末エミュレータ
 +                     ""                                Nop
-##+                     "ファイルマネージャ..."           Exec dbus-launch thunar
+##+                     "ファイルマネージャ..."           Exec dbus-run-session thunar
 ##+                     "テキストエディタ..."             Exec leafpad
 #+                     "メールツール..."                 Exec sylpheed
 ##+                     "メールツール..."                 Exec chrome --no-default-browser-check https://mail.google.com/mail/
