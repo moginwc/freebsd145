@@ -1,6 +1,6 @@
 set folder="."
-set index_format="%4C  %[%Y-%m-%d]  %-24.24L  (%?l?%4l&%4c?)  %s"
-set pager_format="%4C  %[%Y-%m-%d]  %-24.24L  (%?l?%4l&%4c?)  %s%* -- (%P)"
+set index_format="%4C  %[%Y-%m-%d(%a)]  %-24.24L  (%?l?%4l&%4c?)  %s"
+set pager_format="%4C  %[%Y-%m-%d(%a)]  %-24.24L  (%?l?%4l&%4c?)  %s%* -- (%P)"
 set status_format="-%r-%v: %f [Msgs:%?M?%M/?%m] %>-(%P)---"
 set sort=reverse-date
 set pager_stop
