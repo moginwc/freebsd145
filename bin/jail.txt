@@ -2,7 +2,7 @@
 su
 mkdir -p /home/jail/jl-web
 cd /home/jail/jl-web
-fetch https://download.freebsd.org/ftp/releases/amd64/14.2-RELEASE/base.txz
+fetch https://download.freebsd.org/ftp/releases/amd64/14.5-RELEASE/base.txz
 tar -xvpf base.txz
 
 # ネットワーク、タイムゾーンを設定する
