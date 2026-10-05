@@ -31,6 +31,7 @@
 
 # 省エネ動作の設定を行う (3.初期設定 powerd)
     sudo service powerd enable
+    sudo sercice powerd start
 
 # グラフィックドライバーのインストール (3.初期設定 グラフィックドライバー)
     sudo pkg install -y -q drm-515-kmod
