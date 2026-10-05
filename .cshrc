@@ -11,8 +11,8 @@ alias la	ls -aF
 alias lf	ls -FA
 alias ll	ls -lAF
 
-alias l		'ls -l | more -e'
-alias ll	'ls -la | more -e'
+alias l		'ls -l | less -E'
+alias ll	'ls -la | less -E'
 alias vi	vim
 alias rm	'rm -i'
 alias mv    'mv -i'
