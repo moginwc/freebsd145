@@ -21,8 +21,8 @@ with open(txt_filename, 'r') as file:
 
         # フィールドをA列、B列、C列に追加する
         sheet.cell(row=row_num, column=1, value=fields[0])
-        sheet.cell(row=row_num, column=2, value=number(fields[1]))
-        sheet.cell(row=row_num, column=3, value=number(fields[2]))
+        sheet.cell(row=row_num, column=2, value=float(fields[1]))
+        sheet.cell(row=row_num, column=3, value=float(fields[2]))
 
         row_num += 1
 
