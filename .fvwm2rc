@@ -49,6 +49,13 @@ AddToFunc Func-LaunchOrRaise_mlterm
 + I Next (mlterm) Focus
 + I None (mlterm) Exec mlterm --geometry=80x24 --title="端末エミュレータ"
 
+# ランチャー(leafpad) 起動またはフォーカスする
+DestroyFunc Func-LaunchOrRaise_leafpad
+AddToFunc Func-LaunchOrRaise_leafpad
++ I All (leafpad) Raise
++ I Next (leafpad) Focus
++ I None (leafpad) Exec leafpad --tab-width=4
+
 # ランチャー(conky) 起動またはフォーカスする
 DestroyFunc Func-LaunchOrRaise_conky
 AddToFunc Func-LaunchOrRaise_conky
@@ -240,6 +247,14 @@ AddToMenu mlterm_menu
 +                     "mlterm"                              Title
 +                     "新規ウインドウ 80x24"                Exec mlterm --geometry=80x24 --title=端末エミュレータ
 +                     "新規ウインドウ 132x24"               Exec mlterm --geometry=132x24 --title=端末エミュレータ
++                     "新規ウインドウ 80x24 (曖昧幅:半角)"  Exec mlterm --geometry=80x24 --title="端末エミュレータ - 曖昧幅:半角" --ac=1
+
+# ランチャー(leafpad)右クリックメニュー
+AddToMenu leafpad_menu
++                     "leafpad"                         Title
++                     "新規ドキュメント"                Exec leafpad --tab-width=4
++                     ""                                Nop
++                     "全終了"                          All (leafpad) Close
 
 #----------------------------------------------------------------------
 # 5: マウスとキー設定
@@ -371,6 +386,8 @@ Style "QuitVerify" NoTitle, NoHandles, BorderWidth 5
 ##*FvwmButtons: (Icon "firefox.png",   Action (Mouse 1) Func-LaunchOrRaise_firefox,  Action (Mouse 3) Menu firefox_menu)
 ##*FvwmButtons: (Icon "chrome.png",    Action (Mouse 1) Func-LaunchOrRaise_chromium, Action (Mouse 3) Menu chromium_menu)
 ##*FvwmButtons: (Icon "xterm-sol.png", Action (Mouse 1) Func-LaunchOrRaise_mlterm,   Action (Mouse 3) Menu mlterm_menu)
+
+##*FvwmButtons: (Icon "leafpad.png", Action (Mouse 1) Func-LaunchOrRaise_leafpad,   Action (Mouse 3) Menu leafpad_menu)
 
 ##*FvwmButtons: (Swallow "xload" 'Exec xload -update 3 -nolabel -bg \\#cecece', Action(Mouse 1) Func-LaunchOrRaise_conky)
 ##*FvwmButtons: (Swallow "xbatt" 'Exec xbatt -bg \\#cecece', Padding 0 2)
