@@ -325,6 +325,9 @@
     sudo pkg install -y -q xload
     sudo pkg install -y -q xbatt
 
+# 9-3.ランチャーをさらに加えたい
+    cp /usr/local/share/icons/hicolor/32x32/apps/leafpad.png ~/icons
+
 # 9-14. 音量調整時に、画面上に音量・ミュート状態を表示したい
     mkdir -p ~/bin
     cp ./bin/volume_osd_client.tcsh ~/bin/
