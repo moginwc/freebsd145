@@ -22,6 +22,9 @@
 # 基本設定
 #----------
 
+# umask
+    umask 27
+
 # sudo認証
     sudo -v || exit 1
 
