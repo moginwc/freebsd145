@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=バイナリーダンプ
+Exec=mlterm -e tcsh -c 'jhexdump.pl %F | less -E ; bash -c "read -n 1"'
