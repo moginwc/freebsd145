@@ -120,7 +120,7 @@
 
 # コンソールでの日本語表示設定 (3.初期設定 日本語表示コンソール)
     pushd /usr/share/vt/fonts
-    sudo fetch http://people.freebsd.org/~emaste/newcons/b16.fnt
+    sudo fetch -a http://people.freebsd.org/~emaste/newcons/b16.fnt
     popd
     sudo sysrc allscreens_flags="-f b16.fnt"
 
