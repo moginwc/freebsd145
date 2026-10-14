@@ -15,7 +15,7 @@ alias l		'ls -l | less -E'
 alias ll	'ls -la | less -E'
 alias vi	vim
 alias rm	'rm -i'
-alias mv    'mv -i'
+alias mv	'mv -i'
 
 # These are normally set through /etc/login.conf.  You may override them here
 # if wanted.
