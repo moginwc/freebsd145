@@ -119,9 +119,9 @@
 
 # コンソールでの日本語表示設定 (3.初期設定 日本語表示コンソール)
     pushd /usr/share/vt/fonts
-    sudo fetch https://people.freebsd.org/~emaste/newcons/b16.fnt
+    sudo fetch http://people.freebsd.org/~emaste/newcons/b16.fnt
     popd
-    sudo sysrc font8x16="b16.fnt"
+    sudo sysrc allscreens_flags="-f b16.fnt"
 
 # [CpasLock]キーを[半角/全角]キーに割り当てる (3.初期設定 日本語入力2)
     cp -r ./.xkb ~
