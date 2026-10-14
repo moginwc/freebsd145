@@ -25,7 +25,7 @@ autocutsel -selection PRIMARY &
 autocutsel -selection CLIPBOARD &
 
 ##rm -f /tmp/volume_osd_value
-##python3.11 $HOME/bin/volume_osd_daemon.py &
+##python3.12 $HOME/bin/volume_osd_daemon.py &
 
 #numlock#numlockx
 
