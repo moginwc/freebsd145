@@ -30,7 +30,7 @@
 
 # 省エネ動作の設定を行う (3.初期設定 powerd)
     sudo service powerd enable
-    sudo sercice powerd start
+    sudo service powerd start
 
 # システム起動時に ntpdが起動するよう設定する (3.初期設定 ntpd)
     sudo service ntpd enable
@@ -102,7 +102,7 @@
 # 端末エミュレータのインストール、再コンパイル、設定 (3.初期設定 端末エミュレータ)
     sudo pkg install -y -q mlterm
 
-    sudo git clone --depth 1 --branch 2026Q1 https://git.FreeBSD.org/ports.git /usr/ports
+    sudo git clone --depth 1 --branch 2026Q3 https://git.FreeBSD.org/ports.git /usr/ports
 
     sudo mkdir -p /var/db/ports/x11_mlterm/
     sudo cp ./var_db_ports_x11_mlterm_options /var/db/ports/x11_mlterm/options
@@ -110,6 +110,7 @@
 
     sudo env BATCH=yes make
     sudo env BATCH=yes make reinstall
+    sudo pkg lock -y mlterm
     popd
 
     cp -r ./.mlterm ~
