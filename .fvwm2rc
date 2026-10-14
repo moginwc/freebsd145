@@ -197,7 +197,7 @@ AddToMenu Utilities   "ユーティリティ"                  Title
 +                     "ウィンドウマネージャの再起動..." Restart
 +                     "ロックスクリーン"                Exec xlock -mode blank -mousemotion -timeout 10
 +                     "拡大鏡..."                        Exec lupe -geometry 24x24 -noshape -mag 8
-##+                     "拡大鏡..."                        Exec python3.11 $HOME/bin/pixel_loupe.py
+##+                     "拡大鏡..."                        Exec python3.12 $HOME/bin/pixel_loupe.py
 ##+                     "文字コード表..."                 Exec firefox $HOME/html/cp932map.html
 +                     "入力メソッドの設定..."           Exec uim-pref-gtk3
 +                     "日本語入力システム設定..."       Exec uim-pref-gtk3
