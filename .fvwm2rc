@@ -166,7 +166,7 @@ AddToMenu Programs    "プログラム"                      Title
 +                     "端末エミュレータ 132x24..."      Exec mlterm --geometry=132x24 --title=端末エミュレータ
 +                     ""                                Nop
 ##+                     "ファイルマネージャ..."           Exec dbus-run-session thunar
-##+                     "テキストエディタ..."             Exec leafpad
+##+                     "テキストエディタ..."             Exec leafpad --tab-width=4
 #+                     "メールツール..."                 Exec sylpheed
 ##+                     "メールツール..."                 Exec chrome --no-default-browser-check https://mail.google.com/mail/
 +                     "カレンダ..."                     Exec xterm -geometry 70x38 -T カレンダ -e tcsh -c "cal -y; stty -icanon; dd bs=1 count=1"
