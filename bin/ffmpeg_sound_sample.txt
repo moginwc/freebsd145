@@ -30,7 +30,7 @@ ffmpeg \
     -f segment \
     -segment_time 600 \
     -strftime 1 \
-    ./radio_%Y%m%d_%H%M%S.mp3
+    radio_%Y%m%d_%H%M.mp3
 
 # 10分ごとにファイルを分割して録音し、直近の12時間のみ保存
 ffmpeg \
