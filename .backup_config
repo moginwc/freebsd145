@@ -1,9 +1,9 @@
 # 対象ディレクトリ・ファイル
 boot.config
 boot/loader.conf
-etc/aliases
 etc/gettytab
 etc/jail.conf
+etc/mail/aliases
 etc/mail/mailer.conf
 etc/motd.template
 etc/motd.template.org
