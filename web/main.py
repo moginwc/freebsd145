@@ -45,7 +45,11 @@ def read_root(request: Request, keyword: str = ""):
         else:
             cur.execute("SELECT * FROM location ORDER BY name")
         records = cur.fetchall()
-    return templates.TemplateResponse("index.html", {"request": request, "records": records})
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={"records": records},
+    )
 
 # 追加
 @app.post("/add")
