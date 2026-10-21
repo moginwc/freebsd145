@@ -309,15 +309,6 @@
     rehash
     update-mime-database ~/.local/share/mime
 
-# 8-14.サムネイル一覧から画像を選択して表示したい (nsxiv)
-    sudo pkg install -y -q nsxiv
-    mkdir -p ~/.config/nsxiv/exec
-    cp ./.config/nsxiv/exec/image-info ~/.config/nsxiv/exec/
-    cp ./.config/nsxiv/exec/key-handler ~/.config/nsxiv/exec/
-    chmod +x ~/.config/nsxiv/exec/image-info
-    chmod +x ~/.config/nsxiv/exec/key-handler
-    sudo pkg install -y -q p5-Image-ExifTool
-
 # 8-18.シンプルなGUIテキストエディタを使いたい(leafpad)
     sudo pkg install -y -q leafpad
     mkdir -p ~/.config/leafpad
@@ -343,8 +334,15 @@
 # 10-1.GIMPを使いたい
     sudo pkg install -y -q gimp
 
-# 10-2.サムネイル一覧から画像を表示したい(nsxiv)
+# 10-3.サムネイル一覧から画像を表示したい(nsxiv)
     sudo pkg install -y -q nsxiv
+
+    mkdir -p ~/.config/nsxiv/exec
+    cp ./.config/nsxiv/exec/image-info ~/.config/nsxiv/exec/
+    cp ./.config/nsxiv/exec/key-handler ~/.config/nsxiv/exec/
+    chmod +x ~/.config/nsxiv/exec/image-info
+    chmod +x ~/.config/nsxiv/exec/key-handler
+    sudo pkg install -y -q p5-Image-ExifTool
 
 # 10-4.軽量画像ビュアnsxivをカスタマイズして使いたい
     sudo mkdir -p /var/db/ports/graphics_nsxiv/
@@ -377,7 +375,7 @@
 # 11-10.自作のmanページを作成したい
     cp -r ./man ~
 
-# 15-13.カラーピッカー付き拡大鏡アプリを作成したい
+# 15-14.カラーピッカー付き拡大鏡アプリを作成したい
     sudo pkg install -y -q py311-tkinter py311-pillow
     mkdir -p ~/bin
     cp ./bin/pixel_loupe.py ~/bin
