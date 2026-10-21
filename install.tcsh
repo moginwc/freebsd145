@@ -378,7 +378,7 @@
     cp -r ./man ~
 
 # 15-14.カラーピッカー付き拡大鏡アプリを作成したい
-    sudo pkg install -y -q py311-tkinter py311-pillow
+    sudo pkg install -y -q py312-tkinter py312-pillow
     mkdir -p ~/bin
     cp ./bin/pixel_loupe.py ~/bin
 
