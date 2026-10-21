@@ -290,6 +290,7 @@
 
     mkdir -p ~/.config/Thunar
     cp ./.config/Thunar/uca.xml ~/.config/Thunar/
+    mkdir -p ~/bin
     cp ./bin/img_conv.tcsh ~/bin/
     chmod +x ~/bin/img_conv.tcsh
     cp ./.config/gtk-3.0/bookmarks ~/.config/gtk-3.0/
