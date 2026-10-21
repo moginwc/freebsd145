@@ -1,12 +1,12 @@
-# FreeBSD 14.5 の設定ファイル ★★★作成中★★★
+# FreeBSD 14.5 の設定ファイル
 
-FreeBSD 14.5 インストール＆活用ガイド 2026-XX-XX 第13版 に対応
+FreeBSD 14.5 インストール＆活用ガイド 2026-10-23 第13版 に対応
 https://moginwc.sakura.ne.jp/FreeBSD145InstallGuide.pdf
 
 インストールをお急ぎの方は、下記を実行してください。
 
-ステップ１．FreeBSD 14.5 インストール＆活用ガイド 2026-XX-XX 第13版 の
-　　　　　　XX〜XXページ（sudoを設定するまで）を実行する。
+ステップ１．FreeBSD 14.5 インストール＆活用ガイド 2026-10-23 第13版 の
+　　　　　　22〜77ページ（sudoを設定するまで）を実行する。
 ステップ２．# pkg install -y git を実行する。
 ステップ３，# exit でログアウトする。
 ステップ４．pcuser でログインする。
@@ -19,6 +19,6 @@ https://moginwc.sakura.ne.jp/FreeBSD145InstallGuide.pdf
             2. sudoのパスワード入力、およびインストーラー最後に
                ファイル共有smbのパスワード入力があります)
 ステップ８．% sudo shutdown -r now
-ステップ９．XXXページ以降を参照。
+ステップ９．158ページ以降を参照。
 
 [EOF]
