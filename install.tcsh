@@ -300,6 +300,8 @@
     mkdir -p ~/.config/xarchiver
     cp ./.config/xarchiver/xarchiverrc ~/.config/xarchiver/
 
+    mkdir ~/work
+
 # 8-13. (ファイルタイプ表示名の変更)
     mkdir -p ~/.local/share/mime/packages
     cp /usr/local/share/mime/packages/freedesktop.org.xml ~/.local/share/mime/packages
