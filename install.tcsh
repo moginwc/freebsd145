@@ -276,6 +276,7 @@
 
 # 8-13.ファイル管理ソフトThunarを使いたい、のインストールと設定ファイルのコピー
     sudo pkg install -y -q thunar thunar-archive-plugin xarchiver
+    rehash
 
     xdg-mime default userapp-vim-readonly.desktop text/plain
     xdg-mime default userapp-feh.desktop image/png
@@ -346,22 +347,15 @@
     sudo pkg install -y -q nsxiv
 
 # 10-4.軽量画像ビュアnsxivをカスタマイズして使いたい
-    sudo pkg install -y -q gmake git
-    rehash # gmakeを認識させる
-    mkdir -p ~/work
-    pushd ~/work
-    git clone https://codeberg.org/nsxiv/nsxiv.git
-    pushd ./nsxiv
+    sudo mkdir -p /var/db/ports/graphics_nsxiv/
+    sudo cp ./var_db_ports_graphics_nsxiv_options /var/db/ports/graphics_nsxiv/options
+    pushd /usr/ports/graphics/nsxiv
 
-    grep -Eq '^[[:space:]]*VERSION[[:space:]]*=[[:space:]]*34([[:space:]]|$)' ./config.mk
-    if ($status == 0) then
-        # nsxivバージョン34である場合にコンパイルを実行する
-        cp ~/${ver}/nsxiv/config.def.h .
-        cp ~/${ver}/nsxiv/config.mk .
-        gmake CC=cc
-        sudo gmake install
-    endif
-    popd
+    sudo env BATCH=yes make extract
+    sudo cp ~/${ver}/nsxiv/config.def.h ./work/nsxiv-33
+    sudo env BATCH=yes make
+    sudo env BATCH=yes make reinstall
+    sudo pkg lock -y nsxiv
     popd
 
 # (10-4.関連) サンプル画像のコピー
