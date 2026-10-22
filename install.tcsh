@@ -372,7 +372,7 @@
     cp ant_tower.scad ~
 
 # 10-6.QGIS(地理空間情報の閲覧、編集、分析)を使いたい
-    sudo pkg install -y -q qgis
+    sudo pkg install -y -q qgis-ltr
     cp line.csv point.csv ~
 
 # 11-10.自作のmanページを作成したい
