@@ -196,8 +196,8 @@ AddToMenu Utilities   "ユーティリティ"                  Title
 +                     "再表示"                          Refresh
 +                     "ウィンドウマネージャの再起動..." Restart
 +                     "ロックスクリーン"                Exec xlock -mode blank -mousemotion -timeout 10
-+                     "拡大鏡..."                        Exec lupe -geometry 24x24 -noshape -mag 8
-##+                     "拡大鏡..."                        Exec python3.12 $HOME/bin/pixel_loupe.py
++                     "拡大鏡..."                       Exec lupe -geometry 24x24 -noshape -mag 8
+##+                     "拡大鏡..."                       Exec python3.12 $HOME/bin/pixel_loupe.py
 ##+                     "文字コード表..."                 Exec firefox $HOME/html/cp932map.html
 +                     "入力メソッドの設定..."           Exec uim-pref-gtk3
 +                     "日本語入力システム設定..."       Exec uim-pref-gtk3
@@ -378,7 +378,7 @@ Style "QuitVerify" NoTitle, NoHandles, BorderWidth 5
 ##Style "FvwmButtons" NoTitle, BorderWidth 0, HandleWidth 0, WindowListSkip, NeverFocus, FixedPosition
 
 ##*FvwmButtons: Back           #cecece
-##*FvwmButtons: ButtonGeometry 48x48+563-0
+##*FvwmButtons: ButtonGeometry 48x48+539-0
 ##*FvwmButtons: Rows           1
 ##*FvwmButtons: Frame          1
 ##*FvwmButtons: ActiveColorset 12
