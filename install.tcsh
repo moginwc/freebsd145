@@ -383,6 +383,10 @@
     mkdir -p ~/bin
     cp ./bin/pixel_loupe.py ~/bin
 
+# 15-17.UTF-8対応日本語表示可能な16進ダンプツールを作成したい
+    cp ./bin/jhexdump.* ~/bin
+    chmod +x ~/bin/jhexdump.pl
+
 # おまけ. 文字コード表
     cp -r ./html ~
 
